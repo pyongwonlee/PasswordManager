@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PasswordManager.Models.Entities.Password>
+
+@{
+    ViewBag.Title = "Password Manager";
+}
+
+<h2>Manage User names and Passwords</h2>
+
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1 text-right">
+        @using (Ajax.BeginForm(
+    null,
+    null,
+    new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "passwordList"
+    },
+    new { @class = "form-inline", role = "form" }
+    ))
+        {
+            <div class="form-group">
+                <input type="search" name="searchTerm" class="form-control" />
+            </div>
+            <input type="submit" value="Search by Name" class="btn btn-info" />
+        }
+    </div>
+</div>
+<br />
+
+@Html.Partial("_List", Model)
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            $('#passwordInfo').on('hidden.bs.modal', function (e) {
+                $(this).removeData('bs.modal');
+            });
+        });
+
+    </script>
+}

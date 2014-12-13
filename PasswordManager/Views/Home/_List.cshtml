@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PasswordManager.Models.Entities.Password>
+
+<div class="passwordList">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>
+                Company
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Web Site
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PasswordCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Category.Name)
+                </td>
+                <td>
+                    <a href="@item.Company.WebAddress" target="_blank">@item.Company.WebAddress</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @*Html.ActionLink("Details", "Details", new { id = item.AccountId })*@
+                    <a href="@Url.Action("Details", new { id = item.PasswordId })" 
+                       class="btn btn-default btn-sm" data-toggle="modal" data-target="#passwordInfo">
+                        Details
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+<div class="modal fade" id="passwordInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

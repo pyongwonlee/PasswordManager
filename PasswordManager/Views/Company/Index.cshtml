@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<PasswordManager.Models.Entities.Company>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Companies</h2>
+<br />
+
+<div class="row">
+    @Html.ActionLink("Create a New Company", "Create", null, new { @class = "btn btn-primary" })
+</div>
+<br />
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Web Address
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WebAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CompanyId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), 
+        PagedListRenderOptions.Classic)
+</div>

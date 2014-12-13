@@ -1,0 +1,38 @@
+﻿@model PasswordManager.Models.Entities.Password
+
+
+
+<div class="modal-header">
+    <h3>@Model.Company.Name</h3>
+    <small>[@Model.Company.Category.Name]</small>
+</div>
+<div class="modal-body">
+    <ul>
+        <li>User Name: <span class="text-primary">@Model.UserName</span></li>
+        <li>Password: <span class="text-primary">@Model.PasswordCode</span></li>
+        <li>Comment: @Model.Comment</li>
+        @if (!string.IsNullOrEmpty(Model.Note1))
+        {  
+            <li class="text-warning">@Model.Note1</li>  
+        }
+        @if (!string.IsNullOrEmpty(Model.Note2))
+        {  
+            <li class="text-warning">@Model.Note2</li>  
+        }
+        @if (!string.IsNullOrEmpty(Model.Note3))
+        {
+            <li class="text-warning">@Model.Note3</li>
+        }
+        @if (!string.IsNullOrEmpty(Model.Note4))
+        {
+            <li class="text-warning">@Model.Note4</li>
+        }
+        @if (!string.IsNullOrEmpty(Model.Note5))
+        {
+            <li class="text-warning">@Model.Note5</li>
+        }
+    </ul>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

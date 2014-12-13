@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<PasswordManager.Models.Entities.Password>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Accounts</h2>
+
+<br />
+
+<div class="row">
+    @Html.ActionLink("Create a New Password", "Create", null, new { @class = "btn btn-primary" })
+</div>
+<br />
+
+<div class="row">
+    <div class="text-right">
+         @using (Html.BeginForm("Index", "Password", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+         {
+            <label for="categoryId">Category: </label>
+            @Html.DropDownList("categoryId", null, new { @class = "form-control" })
+            <input id="filterByCategory" type="submit" value="Filter By Category" class="hidden" />
+         }
+    </div>
+    <br />
+</div>
+
+@foreach (var item in Model)
+{ 
+<div class="well well-sm">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>@item.Company.Name</h3>
+                </div>
+                <div class="col-sm-4">
+                    <small><em>@item.Comment</em></small>
+                </div>
+                <div class="col-sm-4">
+                    <p class="acc-pw text-warning">@item.UserName : @item.PasswordCode</p>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-2 alert-info">@item.Note1</div>
+                <div class="col-sm-2 alert-success">@item.Note2</div>
+                <div class="col-sm-2 alert-info">@item.Note3</div>
+                <div class="col-sm-2 alert-success">@item.Note4</div>
+                <div class="col-sm-2 alert-info">@item.Note5</div>
+            </div>
+        </div>
+        <div class="col-sm-2 col-sm-offset-1">
+            @Html.ActionLink("Edit", "Edit", new { id = item.PasswordId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PasswordId })
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { categoryId = ViewBag.SelectedCategoryId, page }),
+        PagedListRenderOptions.Classic)
+</div>
+
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            $('#categoryId').change(function (e) {
+                $("#filterByCategory").click();
+            });
+        });
+
+    </script>
+}

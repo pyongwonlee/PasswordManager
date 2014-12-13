@@ -1,0 +1,24 @@
+﻿@model PasswordManager.Models.Entities.Company
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.SumbitTitle = "Save";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+   @Html.Partial("_CompanyForm", @Model)
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-link" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
