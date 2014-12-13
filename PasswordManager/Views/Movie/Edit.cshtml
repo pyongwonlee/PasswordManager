@@ -1,0 +1,28 @@
+﻿@model PasswordManager.Models.Entities.Movie
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.SumbitTitle = "Save";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_MovieForm", @Model)
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { directorId = 0, page = 1 }, new { @class = "btn btn-link" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

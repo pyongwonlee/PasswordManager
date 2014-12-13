@@ -25,7 +25,7 @@ namespace PasswordManager.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(repository.Categories, "CategoryId", "Name");
+            ViewBag.CategoryIdDropdown = new SelectList(repository.Categories, "CategoryId", "Name");
             return View(new Company());
         }
         
@@ -64,7 +64,7 @@ namespace PasswordManager.Controllers
                 repository.Update(company);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(repository.Categories, "CategoryId", "Name", company.CategoryId);
+            ViewBag.CategoryIdDropdown = new SelectList(repository.Categories, "CategoryId", "Name", company.CategoryId);
             return View(company);
         }
 

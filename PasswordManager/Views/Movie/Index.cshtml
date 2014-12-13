@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<PasswordManager.Models.Entities.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Movies</h2>
+
+<br />
+
+<div class="row">
+    @Html.ActionLink("Create a New Movie", "Create", null, new { @class = "btn btn-primary" })
+</div>
+<br />
+
+<div class="row">
+    <div class="text-right">
+        @using (Html.BeginForm("Index", "Movie", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            <label for="directorId">Category: </label>
+            @Html.DropDownList("DirectorId", null, new { @class = "form-control" })
+            <input id="filterByDirector" type="submit" value="Filter By Director" class="hidden" />
+        }
+    </div>
+    <br />
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Director
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Tomatometer
+        </th>
+        <th>
+            IMDB Rating
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tomatometer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMDBRating)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { directorId = ViewBag.SelectedDirectorId, page }),
+        PagedListRenderOptions.Classic)
+</div>
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            $('#DirectorId').change(function (e) {
+                $("#filterByDirector").click();
+            });
+        });
+
+    </script>
+}

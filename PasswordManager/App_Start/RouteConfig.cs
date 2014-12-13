@@ -50,6 +50,24 @@ namespace PasswordManager
             );
 
             routes.MapRoute(
+                name: "Directors",
+                url: "Director/{action}/{id}",
+                defaults: new { controller = "Director", action = "Index", id = 0 }
+            );
+
+            routes.MapRoute(
+                name: "MovieList",
+                url: "Movies",
+                defaults: new { controller = "Movie", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "Movies",
+                url: "Movie/{action}/{id}",
+                defaults: new { controller = "Movie", action = "Index", id = 0 }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Default", id = UrlParameter.Optional }

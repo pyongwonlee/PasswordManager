@@ -1,0 +1,54 @@
+﻿@model PasswordManager.Models.Entities.Movie
+
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="CompanyId">Company</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DirectorId, (SelectList)ViewBag.DirectorDropdown, String.Empty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DirectorId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Year, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Year)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tomatometer, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Tomatometer, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Tomatometer)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IMDBRating, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.IMDBRating, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IMDBRating)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@ViewBag.SumbitTitle" class="btn btn-default" />
+        </div>
+    </div>
+</div>

@@ -35,6 +35,7 @@ namespace PasswordManager.Helpers
             kernel.Bind<IPasswordHelperRepository>().To<EFPasswordHelperRepository>();
 
             kernel.Bind<IDirectorRepository>().To<EFDirectorRepository>();
+            kernel.Bind<IMovieRepository>().To<EFMovieRepository>();
         }
     }
 }

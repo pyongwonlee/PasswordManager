@@ -15,9 +15,11 @@ namespace PasswordManager.Models.Entities
         [Required(ErrorMessage = "Released Year is required")]
         public int Year { get; set; }
 
+        [Range(0,100)]
         public int? Tomatometer { get; set; }
 
         [Display(Name = "IMDB Rating")]
+        [Range(0.0, 10.0)]
         public double? IMDBRating { get; set; }
 
         [Required(ErrorMessage = "Director is required")]
@@ -25,6 +27,6 @@ namespace PasswordManager.Models.Entities
         public int DirectorId { get; set; }
 
         [ForeignKey("DirectorId")]
-        public Director Director { get; set; }
+        public virtual Director Director { get; set; }
     }
 }
