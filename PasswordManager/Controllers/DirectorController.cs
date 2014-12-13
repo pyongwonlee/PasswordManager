@@ -1,0 +1,96 @@
+﻿using PasswordManager.Models.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using PagedList;
+using PasswordManager.Models.Entities;
+
+namespace PasswordManager.Controllers
+{
+    public class DirectorController : Controller
+    {
+        IDirectorRepository repository;
+        int PAGE_SIZE = 20;
+
+        public DirectorController(IDirectorRepository repo)
+        {
+            repository = repo;
+        }
+
+        public ActionResult Index(int page = 1)
+        {
+            var directors = repository
+                .GetDirectorsInPage(page, PAGE_SIZE);
+
+            return View(directors);
+        }
+
+        public ActionResult Create()
+        {
+            return View(new Director());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Director director)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.Add(director);
+                return RedirectToAction("Index", new { page = 1 });
+            }
+            return View(director);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Director director = repository.Find(id);
+            if (director == null)
+            {
+                return HttpNotFound();
+            }
+            return View(director);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Director director)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.Update(director);
+                return RedirectToAction("Index", new { page = 1 });
+            }
+            return View(director);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Director director = repository.Find(id);
+            if (director == null)
+            {
+                return HttpNotFound();
+            }
+            return View(director);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            repository.Delete(id);
+            return RedirectToAction("Index", new { page = 1 });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                repository.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

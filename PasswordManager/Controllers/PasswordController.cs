@@ -48,7 +48,7 @@ namespace PasswordManager.Controllers
                 return RedirectToAction("Index", new { categoryId = 0, page = 1 });
             }
 
-            ViewBag.CompanyId = new SelectList(repository.Companies, "CompanyId", "Name", pw.CompanyId);
+            ViewBag.CompanyIdDropdown = new SelectList(repository.Companies, "CompanyId", "Name", pw.CompanyId);
             return View(pw);
         }
 
@@ -59,7 +59,7 @@ namespace PasswordManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyId = new SelectList(repository.Companies, "CompanyId", "Name", pw.CompanyId);
+            ViewBag.CompanyIdDropdown = new SelectList(repository.Companies, "CompanyId", "Name", pw.CompanyId);
             return View(pw);
         }
 

@@ -1,0 +1,26 @@
+﻿@model PasswordManager.Models.Entities.Director
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Director</h2>
+
+<h3>Are you sure you want to delete [@Model.Name]?</h3>
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+
+<hr />
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-link" })
+</div>
+

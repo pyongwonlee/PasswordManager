@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<PasswordManager.Models.Entities.Director>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Directors</h2>
+
+<div class="row">
+    @Html.ActionLink("Create a New Director", "Create", null, new { @class = "btn btn-primary" })
+</div>
+<br />
+
+@foreach (var item in Model)
+{
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3>@item.Name</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class ="col-sm-1 col-sm-offset-1">
+                        <span class="badge pull-left">@item.Movies.Count()</span>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="alert alert-info">@string.Join(", ", item.Movies.Select(m => m.Title).ToArray())</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 col-sm-offset-1">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+        PagedListRenderOptions.Classic)
+</div>

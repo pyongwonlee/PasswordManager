@@ -33,6 +33,8 @@ namespace PasswordManager.Helpers
             kernel.Bind<ICompanyRepository>().To<EFCompanyRepository>();
             kernel.Bind<IPasswordRepository>().To<EFPasswordtRepository>();
             kernel.Bind<IPasswordHelperRepository>().To<EFPasswordHelperRepository>();
+
+            kernel.Bind<IDirectorRepository>().To<EFDirectorRepository>();
         }
     }
 }

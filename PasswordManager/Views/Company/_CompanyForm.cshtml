@@ -8,7 +8,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
     </div>
@@ -16,7 +16,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Description)
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Description)
         </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.WebAddress, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.WebAddress)
+            @Html.TextBoxFor(model => model.WebAddress, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.WebAddress)
         </div>
     </div>
@@ -32,7 +32,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CategoryId, "CategoryId", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("CategoryId", String.Empty)
+            @Html.DropDownListFor(model => model.CategoryId, (SelectList)ViewBag.CategoryIdDropdown, String.Empty, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CategoryId)
         </div>
     </div>

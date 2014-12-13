@@ -8,5 +8,8 @@ namespace PasswordManager.Models.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Password> Passwords { get; set; }
+
+        public DbSet<Director> Directors { get; set; }
+        public DbSet<Movie> Movies { get; set; }
     }
 }
