@@ -4,6 +4,7 @@ using System;
 using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using PasswordManager.Models.Enums;
 
 namespace PasswordManager.Models.Data
 {
@@ -49,13 +50,35 @@ namespace PasswordManager.Models.Data
             }
         }
 
-        public IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, int page, int pageSize)
+        public IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, MovieSortField sortField, bool sortAscending, int page, int pageSize)
         {
-            return context.Movies
+            var movies = context.Movies
                .Include(m => m.Director)
-               .Where(m => directorId == 0 || m.DirectorId == directorId)
-               .OrderBy(m => m.Title)
-               .ToPagedList(page, pageSize);
+               .Where(m => directorId == 0 || m.DirectorId == directorId);
+
+            switch (sortField)
+            {
+                case MovieSortField.Title:
+                    movies = sortAscending ? movies.OrderBy(m => m.Title) : movies.OrderByDescending(m => m.Title);
+                    break;
+                case MovieSortField.Director:
+                    movies = sortAscending ? movies.OrderBy(m => m.Director.Name) : movies.OrderByDescending(m => m.Director.Name);
+                    break;
+                case MovieSortField.Year:
+                    movies = sortAscending ? movies.OrderBy(m => m.Year) : movies.OrderByDescending(m => m.Year);
+                    break;
+                case MovieSortField.Tomatometer:
+                    movies = sortAscending ? movies.OrderBy(m => m.Tomatometer) : movies.OrderByDescending(m => m.Tomatometer);
+                    break;
+                case MovieSortField.IMDBRating:
+                    movies = sortAscending ? movies.OrderBy(m => m.IMDBRating) : movies.OrderByDescending(m => m.IMDBRating);
+                    break;
+                default:
+                    movies = movies.OrderBy(m => m.Title);
+                    break;
+            }
+
+            return movies.ToPagedList(page, pageSize);
         }
 
         public Movie Find(int id)

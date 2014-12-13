@@ -17,7 +17,7 @@
     <div class="text-right">
         @using (Html.BeginForm("Index", "Movie", FormMethod.Get, new { @class = "form-inline", role = "form" }))
         {
-            <label for="directorId">Category: </label>
+            <label for="directorId">Director: </label>
             @Html.DropDownList("DirectorId", null, new { @class = "form-control" })
             <input id="filterByDirector" type="submit" value="Filter By Director" class="hidden" />
         }
@@ -28,19 +28,19 @@
 <table class="table table-striped">
     <tr>
         <th>
-            Title
+            @Html.ActionLink("Title", "Index", new { directorId = 0, sortKey=ViewBag.TitleSort, page = 1 }, new { @class = "btn btn-link" })
         </th>
         <th>
-            Director
+            @Html.ActionLink("Director", "Index", new { directorId = 0, sortKey = ViewBag.DirectorSort, page = 1 }, new { @class = "btn btn-link" })
         </th>
         <th>
-            Year
+            @Html.ActionLink("Year", "Index", new { directorId = 0, sortKey = ViewBag.YearSort, page = 1 }, new { @class = "btn btn-link" })
         </th>
         <th>
-            Tomatometer
+            @Html.ActionLink("Tomatometer", "Index", new { directorId = 0, sortKey = ViewBag.TomatoSort, page = 1 }, new { @class = "btn btn-link" })
         </th>
         <th>
-            IMDB Rating
+            @Html.ActionLink("IMDB Rating", "Index", new { directorId = 0, sortKey = ViewBag.IMDBSort, page = 1 }, new { @class = "btn btn-link" })
         </th>
         <th></th>
     </tr>
