@@ -17,12 +17,14 @@ namespace PasswordManager.Controllers
             repository = repo;
         }
 
-        public ActionResult Index(int page)
+        [Route("Companies/{page:int?}")]
+        public ActionResult Index(int page=1)
         {
             var companies = repository.Companies.ToPagedList(page, 10);
             return View(companies);
         }
 
+        [Route("Company/Create")]
         public ActionResult Create()
         {
             ViewBag.CategoryIdDropdown = new SelectList(repository.Categories, "CategoryId", "Name");
@@ -31,6 +33,7 @@ namespace PasswordManager.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Company/Create")]
         public ActionResult Create(Company company)
         {
             if (ModelState.IsValid)
@@ -43,6 +46,7 @@ namespace PasswordManager.Controllers
             return View(company);
         }
 
+        [Route("Company/Edit/{id:int}")]
         public ActionResult Edit(int id)
         {
             Company company = repository.Find(id);
@@ -57,6 +61,7 @@ namespace PasswordManager.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Company/Edit/{id:int}")]
         public ActionResult Edit(Company company)
         {
             if (ModelState.IsValid)
@@ -68,6 +73,7 @@ namespace PasswordManager.Controllers
             return View(company);
         }
 
+        [Route("Company/Delete/{id:int}")]
         public ActionResult Delete(int id)
         {
             Company company = repository.Find(id);
@@ -80,6 +86,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Company/Delete/{id:int}")]
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);

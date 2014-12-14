@@ -16,12 +16,14 @@ namespace PasswordManager.Controllers
             this.repository = repo;   
 	    }
 
+        [Route("Categories")]
         public ActionResult Index()
         {
             var categories = repository.Categories;
             return View(categories);
         }
 
+        [Route("Category/Create")]
         public ActionResult Create()
         {
             Category category = new Category();
@@ -30,6 +32,7 @@ namespace PasswordManager.Controllers
                 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Category/Create")]
         public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
@@ -41,6 +44,7 @@ namespace PasswordManager.Controllers
             return View(category);
         }
 
+        [Route("Category/Edit/{id:int}")]
         public ActionResult Edit(int id)
         {
             Category category = repository.Find(id);
@@ -54,6 +58,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Category/Edit/{id:int}")]
         public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
@@ -63,7 +68,8 @@ namespace PasswordManager.Controllers
             }
             return View(category);
         }
-                
+
+        [Route("Category/Delete/{id:int}")]
         public ActionResult Delete(int id)
         {
             Category category = repository.Find(id);
@@ -76,6 +82,7 @@ namespace PasswordManager.Controllers
         
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Category/Delete/{id:int}")]
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);

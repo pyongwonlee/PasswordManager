@@ -14,6 +14,7 @@ namespace PasswordManager.Controllers
             repository = repo;
         }
 
+        [Route("Directors/{page:int?}")]
         public ActionResult Index(int page = 1)
         {
             var directors = repository
@@ -22,6 +23,7 @@ namespace PasswordManager.Controllers
             return View(directors);
         }
 
+        [Route("Director/Create")]
         public ActionResult Create()
         {
             return View(new Director());
@@ -29,6 +31,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Director/Create")]
         public ActionResult Create(Director director)
         {
             if (ModelState.IsValid)
@@ -39,6 +42,7 @@ namespace PasswordManager.Controllers
             return View(director);
         }
 
+        [Route("Director/Edit/{id:int}")]
         public ActionResult Edit(int id)
         {
             Director director = repository.Find(id);
@@ -51,6 +55,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Director/Edit/{id:int}")]
         public ActionResult Edit(Director director)
         {
             if (ModelState.IsValid)
@@ -61,6 +66,7 @@ namespace PasswordManager.Controllers
             return View(director);
         }
 
+        [Route("Director/Delete/{id:int}")]
         public ActionResult Delete(int id)
         {
             Director director = repository.Find(id);
@@ -73,6 +79,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Director/Delete/{id:int}")]
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);

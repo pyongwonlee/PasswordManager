@@ -1,6 +1,7 @@
 ﻿using PasswordManager.Helpers;
 using PasswordManager.Models.Data;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace PasswordManager.Controllers
 {
@@ -19,6 +20,7 @@ namespace PasswordManager.Controllers
         }
 
         [Authorize]
+        [Route("Home/Search/{searchTerm?}")]
         public ActionResult Index(string searchTerm)
         {
             var model = this.repository.GetPasswords("", searchTerm);
@@ -30,6 +32,7 @@ namespace PasswordManager.Controllers
         }
 
         [Authorize]
+        [Route("Home/Details/{id:int}")]
         public ActionResult Details(int id)
         {
             var model = this.repository.Find(id);
@@ -37,6 +40,7 @@ namespace PasswordManager.Controllers
             return PartialView("_Details", model);
         }
 
+        [Route("Home/About")]
         public ActionResult About()
         {
             ViewBag.Message = "Password Management";

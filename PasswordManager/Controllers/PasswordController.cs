@@ -20,10 +20,9 @@ namespace PasswordManager.Controllers
             categoryRepository = cRepo;
         }
 
+        [Route("Passwords/{page:int?}")]
         public ActionResult Index(int categoryId, int page = 1)
         {
-            //int categoryId = categoryRepository.GetCategoryId(categoryName);
-
             var accounts = repository.GetPasswordsByCategoryInPage(categoryId, page, PAGE_SIZE);
 
             ViewBag.categoryId = new SelectList(categoryRepository.CategoryNames, "categoryId", "Name", categoryId);
@@ -32,6 +31,7 @@ namespace PasswordManager.Controllers
             return View(accounts);
         }
 
+        [Route("Password/Create")]
         public ActionResult Create()
         {
             ViewBag.CompanyIdDropdown = new SelectList(repository.Companies, "CompanyId", "Name");
@@ -40,6 +40,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Password/Create")]
         public ActionResult Create(Password pw)
         {
             if (ModelState.IsValid)
@@ -52,6 +53,7 @@ namespace PasswordManager.Controllers
             return View(pw);
         }
 
+        [Route("Password/Edit/{id:int}")]
         public ActionResult Edit(int id)
         {
             Password pw = repository.Find(id);
@@ -65,6 +67,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Password/Edit/{id:int}")]
         public ActionResult Edit(Password pw)
         {
             if (ModelState.IsValid)
@@ -76,6 +79,7 @@ namespace PasswordManager.Controllers
             return View(pw);
         }
 
+        [Route("Password/Delete/{id:int}")]
         public ActionResult Delete(int id)
         {
             Password pw = repository.Find(id);
@@ -88,6 +92,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Password/Delete/{id:int}")]
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);

@@ -16,7 +16,8 @@ namespace PasswordManager.Controllers
             repository = repo;
         }
 
-        public ActionResult Index(int directorId=0, string sortKey="title", int page = 1)
+        [Route("Movies/{page:int?}")]
+        public ActionResult Index(int directorId, string sortKey="title", int page = 1)
         {             
             MovieSortField sortField= MovieSortField.Title;
             bool sortAscending = true;
@@ -86,6 +87,7 @@ namespace PasswordManager.Controllers
             return View(model);
         }
 
+        [Route("Movie/Create")]
         public ActionResult Create()
         {
             ViewBag.DirectorDropdown = new SelectList(repository.Directors, "Id", "Name");
@@ -94,6 +96,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Movie/Create")]
         public ActionResult Create(Movie movie)
         {
             if (ModelState.IsValid)
@@ -105,6 +108,7 @@ namespace PasswordManager.Controllers
             return View(movie);
         }
 
+        [Route("Movie/Edit/{id:int}")]
         public ActionResult Edit(int id)
         {
             Movie movie = repository.Find(id);
@@ -118,6 +122,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Movie/Edit/{id:int}")]
         public ActionResult Edit(Movie movie)
         {
             if (ModelState.IsValid)
@@ -129,6 +134,7 @@ namespace PasswordManager.Controllers
             return View(movie);
         }
 
+        [Route("Movie/Delete/{id:int}")]
         public ActionResult Delete(int id)
         {
             Movie movie = repository.Find(id);
@@ -141,6 +147,7 @@ namespace PasswordManager.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Movie/Delete/{id:int}")]
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);
