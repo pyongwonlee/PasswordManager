@@ -16,6 +16,11 @@ textarea {
     max-width: 280px;
 }
 
+/* Movie List */
+table.movie-table > tbody > tr > td {
+    padding-left: 1.5em;
+} 
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;

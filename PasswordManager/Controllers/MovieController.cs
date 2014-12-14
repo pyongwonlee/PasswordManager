@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using PasswordManager.Models.Entities;
 using PasswordManager.Models.Enums;
+using PasswordManager.Models;
 
 namespace PasswordManager.Controllers
 {
@@ -56,18 +57,22 @@ namespace PasswordManager.Controllers
                     sortField = MovieSortField.Title; sortAscending = true;
                     break;
             }
-            var movies = repository.GetMoviesByDirectorInPage(directorId, sortField, sortAscending, page, PAGE_SIZE);
 
-            ViewBag.DirectorId = new SelectList(repository.DirectorNames, "Id", "Name", directorId);
-            ViewBag.SelectedDirectorId = directorId;
+            var model = new MovieIndexViewModel
+            {
+                Movies = repository.GetMoviesByDirectorInPage(directorId, sortField, sortAscending, page, PAGE_SIZE),
+                TotalCount = repository.TotalCount,
 
-            ViewBag.TitleSort = sortKey == "title_desc" ? "title" : "title_desc";
-            ViewBag.DirectorSort = sortKey == "director_desc" ? "director" : "director_desc";
-            ViewBag.YearSort = sortKey == "year_desc" ? "year" : "year_desc";
-            ViewBag.TomatoSort = sortKey == "tomato_desc" ? "tomato" : "tomato_desc";
-            ViewBag.IMDBSort = sortKey == "imdb_desc" ? "imdb" : "imdb_desc";
+                DirectorId = new SelectList(repository.DirectorNames, "Id", "Name", directorId),
+                SelectedDirectorId = directorId,
 
-            return View(movies);
+                TitleSort       = (sortKey == "title_desc") ? "title" : "title_desc",
+                DirectorSort    = (sortKey == "director_desc") ? "director" : "director_desc",
+                YearSort        = (sortKey == "year_desc") ? "year" : "year_desc",
+                TomatoSort      = (sortKey == "tomato_desc") ? "tomato" : "tomato_desc",
+                IMDBSort        = (sortKey == "imdb_desc") ? "imdb" : "imdb_desc"
+            };
+            return View(model);
         }
 
         public ActionResult Create()

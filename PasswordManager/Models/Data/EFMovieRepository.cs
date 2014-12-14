@@ -59,7 +59,7 @@ namespace PasswordManager.Models.Data
             switch (sortField)
             {
                 case MovieSortField.Title:
-                    movies = sortAscending ? movies.OrderBy(m => m.Title) : movies.OrderByDescending(m => m.Title);
+                    movies = sortAscending ? movies.OrderBy(m => m.Title.Replace("The ", "").Replace("the ", "")) : movies.OrderByDescending(m => m.Title.Replace("The ", "").Replace("the ", ""));
                     break;
                 case MovieSortField.Director:
                     movies = sortAscending ? movies.OrderBy(m => m.Director.Name) : movies.OrderByDescending(m => m.Director.Name);
@@ -79,6 +79,14 @@ namespace PasswordManager.Models.Data
             }
 
             return movies.ToPagedList(page, pageSize);
+        }
+
+        public int TotalCount
+        {
+            get 
+            {
+                return context.Movies.Count();
+            }
         }
 
         public Movie Find(int id)

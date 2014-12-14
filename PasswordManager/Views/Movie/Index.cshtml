@@ -1,11 +1,11 @@
-﻿@model PagedList.IPagedList<PasswordManager.Models.Entities.Movie>
+﻿@model PasswordManager.Models.MovieIndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Movies</h2>
-
+<h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
 <br />
 
 <div class="row">
@@ -25,55 +25,59 @@
     <br />
 </div>
 
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.ActionLink("Title", "Index", new { directorId = 0, sortKey=ViewBag.TitleSort, page = 1 }, new { @class = "btn btn-link" })
-        </th>
-        <th>
-            @Html.ActionLink("Director", "Index", new { directorId = 0, sortKey = ViewBag.DirectorSort, page = 1 }, new { @class = "btn btn-link" })
-        </th>
-        <th>
-            @Html.ActionLink("Year", "Index", new { directorId = 0, sortKey = ViewBag.YearSort, page = 1 }, new { @class = "btn btn-link" })
-        </th>
-        <th>
-            @Html.ActionLink("Tomatometer", "Index", new { directorId = 0, sortKey = ViewBag.TomatoSort, page = 1 }, new { @class = "btn btn-link" })
-        </th>
-        <th>
-            @Html.ActionLink("IMDB Rating", "Index", new { directorId = 0, sortKey = ViewBag.IMDBSort, page = 1 }, new { @class = "btn btn-link" })
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table table-striped movie-table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Director.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tomatometer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IMDBRating)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            <th>
+                @Html.ActionLink("Title", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.TitleSort, page = 1 }, new { @class = "btn btn-link" })
+            </th>
+            <th>
+                @Html.ActionLink("Director", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.DirectorSort, page = 1 }, new { @class = "btn btn-link" })
+            </th>
+            <th>
+                @Html.ActionLink("Year", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.YearSort, page = 1 }, new { @class = "btn btn-link" })
+            </th>
+            <th>
+                @Html.ActionLink("Tomatometer", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.TomatoSort, page = 1 }, new { @class = "btn btn-link" })
+            </th>
+            <th>
+                @Html.ActionLink("IMDB Rating", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.IMDBSort, page = 1 }, new { @class = "btn btn-link" })
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Movies)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Director.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tomatometer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IMDBRating)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 
 <div>
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { directorId = ViewBag.SelectedDirectorId, page }),
+    @Html.PagedListPager(Model.Movies, page => Url.Action("Index", new { directorId = Model.SelectedDirectorId, page }),
         PagedListRenderOptions.Classic)
 </div>
 

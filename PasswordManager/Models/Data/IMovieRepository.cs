@@ -14,6 +14,8 @@ namespace PasswordManager.Models.Data
         IEnumerable<Movie> Movies { get; }
         IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, MovieSortField sortField, bool sortAscending, int page, int pageSize);
 
+        int TotalCount { get; }
+
         Movie Find(int id);
 
         int Add(Movie movie);
