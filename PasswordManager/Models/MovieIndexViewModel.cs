@@ -18,5 +18,16 @@ namespace PasswordManager.Models
         public string YearSort { get; set; }
         public string TomatoSort { get; set; }
         public string IMDBSort { get; set; }
+
+        public bool IsTitleSortUp { get; set; }
+        public bool IsTitleSortDown { get; set; }
+        public bool IsDirectorSortUp { get; set; }
+        public bool IsDirectorSortDown { get; set; }
+        public bool IsYearSortUp { get; set; }
+        public bool IsYearSortDown { get; set; }
+        public bool IsTomatoSortUp { get; set; }
+        public bool IsTomatoSortDown { get; set; }
+        public bool IsIMDBSortUp { get; set; }
+        public bool IsIMDBSortDown { get; set; }
     }
 }

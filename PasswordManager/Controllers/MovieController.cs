@@ -70,7 +70,18 @@ namespace PasswordManager.Controllers
                 DirectorSort    = (sortKey == "director_desc") ? "director" : "director_desc",
                 YearSort        = (sortKey == "year_desc") ? "year" : "year_desc",
                 TomatoSort      = (sortKey == "tomato_desc") ? "tomato" : "tomato_desc",
-                IMDBSort        = (sortKey == "imdb_desc") ? "imdb" : "imdb_desc"
+                IMDBSort        = (sortKey == "imdb_desc") ? "imdb" : "imdb_desc",
+
+                IsTitleSortUp   = (sortField == MovieSortField.Title && sortAscending),
+                IsTitleSortDown = (sortField == MovieSortField.Title && !sortAscending),
+                IsDirectorSortUp    = (sortField == MovieSortField.Director && sortAscending),
+                IsDirectorSortDown  = (sortField == MovieSortField.Director && !sortAscending),
+                IsYearSortUp    = (sortField == MovieSortField.Year && sortAscending),
+                IsYearSortDown  = (sortField == MovieSortField.Year && !sortAscending),
+                IsTomatoSortUp  = (sortField == MovieSortField.Tomatometer && sortAscending),
+                IsTomatoSortDown = (sortField == MovieSortField.Tomatometer && !sortAscending),
+                IsIMDBSortUp    = (sortField == MovieSortField.IMDBRating && sortAscending),
+                IsIMDBSortDown = (sortField == MovieSortField.IMDBRating && !sortAscending)
             };
             return View(model);
         }

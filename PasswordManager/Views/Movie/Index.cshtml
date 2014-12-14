@@ -30,18 +30,58 @@
         <tr>
             <th>
                 @Html.ActionLink("Title", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.TitleSort, page = 1 }, new { @class = "btn btn-link" })
+                @if (Model.IsTitleSortUp)
+                {
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                }
+                else if (Model.IsTitleSortDown)
+                {
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                }
             </th>
             <th>
                 @Html.ActionLink("Director", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.DirectorSort, page = 1 }, new { @class = "btn btn-link" })
+                @if (Model.IsDirectorSortUp)
+                {
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                }
+                else if (Model.IsDirectorSortDown)
+                {
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                }
             </th>
             <th>
                 @Html.ActionLink("Year", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.YearSort, page = 1 }, new { @class = "btn btn-link" })
+                @if (Model.IsYearSortUp)
+                {
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                }
+                else if (Model.IsYearSortDown)
+                {
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                }
             </th>
             <th>
                 @Html.ActionLink("Tomatometer", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.TomatoSort, page = 1 }, new { @class = "btn btn-link" })
+                @if (Model.IsTomatoSortUp)
+                {
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                }
+                else if (Model.IsTomatoSortDown)
+                {
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                }
             </th>
             <th>
                 @Html.ActionLink("IMDB Rating", "Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.IMDBSort, page = 1 }, new { @class = "btn btn-link" })
+                @if (Model.IsIMDBSortUp)
+                {
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                }
+                else if (Model.IsIMDBSortDown)
+                {
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                }
             </th>
             <th></th>
         </tr>
