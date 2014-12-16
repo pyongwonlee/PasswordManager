@@ -12,6 +12,9 @@ namespace PasswordManager.Models.Data
 
         Director Find(int id);
 
+        bool Exists(string name);
+        bool Exists(string name, int currentId);
+
         int Add(Director director);
         void Update(Director director);
         void Delete(int id);

@@ -94,6 +94,18 @@ namespace PasswordManager.Models.Data
             return context.Movies.Find(id);
         }
 
+        public bool Exists(string title, int directorId)
+        {
+            return context.Movies
+                .Where(m => m.Title == title && m.DirectorId == directorId).Count() > 0;
+        }
+
+        public bool Exists(string title, int directorId, int currentId)
+        {
+            return context.Movies
+                .Where(m => m.Title == title && m.DirectorId == directorId && m.Id != currentId).Count() > 0;
+        }
+         
         public int Add(Movie movie)
         {
             context.Movies.Add(movie);

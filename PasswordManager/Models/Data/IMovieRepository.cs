@@ -18,6 +18,9 @@ namespace PasswordManager.Models.Data
 
         Movie Find(int id);
 
+        bool Exists(string title, int directorId);
+        bool Exists(string title, int directorId, int currentId);
+
         int Add(Movie movie);
         void Update(Movie movie);
         void Delete(int id);

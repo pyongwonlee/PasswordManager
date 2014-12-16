@@ -101,8 +101,15 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Add(movie);
-                return RedirectToAction("Index", new { directorId = 0, page = 1 });
+                if (!repository.Exists(movie.Title, movie.DirectorId))
+                {
+                    repository.Add(movie);
+                    return RedirectToAction("Index", new { directorId = 0, page = 1 });
+                }
+                else
+                {
+                    ModelState.AddModelError("Title", "The movie already exists.");
+                }
             }
             ViewBag.DirectorDropdown = new SelectList(repository.Directors, "Id", "Name", movie.DirectorId);
             return View(movie);
@@ -127,8 +134,15 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Update(movie);
-                return RedirectToAction("Index", new { directorId = 0, page = 1 });
+                if (!repository.Exists(movie.Title, movie.DirectorId, movie.Id))
+                {
+                    repository.Update(movie);
+                    return RedirectToAction("Index", new { directorId = 0, page = 1 });
+                }
+                else
+                {
+                    ModelState.AddModelError("Title", "The movie already exists.");
+                }
             }
             ViewBag.DirectorDropdown = new SelectList(repository.Directors, "Id", "Name", movie.DirectorId);
             return View(movie);

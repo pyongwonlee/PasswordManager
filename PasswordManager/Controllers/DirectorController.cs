@@ -36,8 +36,15 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Add(director);
-                return RedirectToAction("Index", new { page = 1 });
+                if (!repository.Exists(director.Name))
+                {
+                    repository.Add(director);
+                    return RedirectToAction("Index", new { page = 1 });
+                }
+                else
+                {
+                    ModelState.AddModelError("Name", "The director name already exists.");
+                }
             }
             return View(director);
         }
@@ -60,8 +67,15 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Update(director);
-                return RedirectToAction("Index", new { page = 1 });
+                if (!repository.Exists(director.Name, director.Id))
+                {
+                    repository.Update(director);
+                    return RedirectToAction("Index", new { page = 1 });
+                }
+                else
+                {
+                    ModelState.AddModelError("Name", "The director name already exists.");
+                }
             }
             return View(director);
         }

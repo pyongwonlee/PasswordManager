@@ -38,6 +38,18 @@ namespace PasswordManager.Models.Data
             return context.Directors.Find(id);
         }
 
+        public bool Exists(string name)
+        {
+            return context.Directors
+                .Where(d => d.Name == name).Count() > 0;
+        }
+
+        public bool Exists(string name, int currentId)
+        {
+            return context.Directors
+                .Where(d => d.Name == name && d.Id != currentId).Count() > 0;
+        }
+
         public int Add(Director director)
         {
             context.Directors.Add(director);
