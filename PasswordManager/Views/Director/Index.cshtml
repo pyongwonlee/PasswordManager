@@ -1,17 +1,35 @@
-﻿@model PagedList.IPagedList<PasswordManager.Models.Entities.Director>
+﻿@model PasswordManager.Models.DirectorIndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Directors</h2>
+<h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
+<br />
 
 <div class="row">
     @Html.ActionLink("Create a New Director", "Create", null, new { @class = "btn btn-primary" })
 </div>
 <br />
 
-@foreach (var item in Model)
+<div class="row">
+    <div class="text-right">
+        @using (Html.BeginForm("Index", "Director", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            <div class="form-group">
+                <input type="search" name="searchTerm" class="form-control" value="@Model.SearchString" />
+            </div>
+            <input type="submit" value="Search by Name" class="btn btn-info" />
+        }
+    </div>
+</div>
+<br />
+
+<div class="text-right text-warning">
+    @Model.Directors.GetMetaData().TotalItemCount Directors
+</div>
+@foreach (var item in Model.Directors)
 {
     <div class="well well-sm container">
         <div class="row">
@@ -35,6 +53,6 @@
 }
 
 <div>
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+    @Html.PagedListPager(Model.Directors, page => Url.Action("Index", new { page }),
         PagedListRenderOptions.Classic)
 </div>

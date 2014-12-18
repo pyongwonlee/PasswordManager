@@ -25,10 +25,11 @@ namespace PasswordManager.Models.Data
             }
         }
 
-        public IPagedList<Director> GetDirectorsInPage(int page, int pageSize)
+        public IPagedList<Director> GetDirectorsInPage(int page, int pageSize, string searchTerm)
         {
             return context.Directors
                 .Include(d => d.Movies)
+                .Where(d => (string.IsNullOrEmpty(searchTerm) || d.Name.ToLower().Contains(searchTerm.ToLower())))
                 .OrderBy(d => d.Name)
                 .ToPagedList(page, pageSize);
         }
@@ -37,6 +38,15 @@ namespace PasswordManager.Models.Data
         {
             return context.Directors.Find(id);
         }
+
+        public int TotalCount
+        {
+            get
+            {
+                return context.Directors.Count();
+            }
+        }
+
 
         public bool Exists(string name)
         {

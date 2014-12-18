@@ -8,9 +8,11 @@ namespace PasswordManager.Models.Data
     public interface IDirectorRepository : IDisposable
     {
         IEnumerable<Director> Directors { get; }
-        IPagedList<Director> GetDirectorsInPage(int page, int pageSize);
+        IPagedList<Director> GetDirectorsInPage(int page, int pageSize, string searchTerm);
 
         Director Find(int id);
+
+        int TotalCount { get; }
 
         bool Exists(string name);
         bool Exists(string name, int currentId);

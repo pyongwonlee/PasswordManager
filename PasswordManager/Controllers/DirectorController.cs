@@ -1,6 +1,7 @@
 ﻿using PasswordManager.Models.Data;
 using System.Web.Mvc;
 using PasswordManager.Models.Entities;
+using PasswordManager.Models;
 
 namespace PasswordManager.Controllers
 {
@@ -15,12 +16,18 @@ namespace PasswordManager.Controllers
         }
 
         [Route("Directors/{page:int?}")]
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1, string searchTerm = "")
         {
             var directors = repository
-                .GetDirectorsInPage(page, PAGE_SIZE);
+                .GetDirectorsInPage(page, PAGE_SIZE, searchTerm);
 
-            return View(directors);
+            var model = new DirectorIndexViewModel
+            {
+                Directors = directors,
+                TotalCount = repository.TotalCount,
+                SearchString = searchTerm
+            };
+            return View(model);
         }
 
         [Route("Director/Create")]
