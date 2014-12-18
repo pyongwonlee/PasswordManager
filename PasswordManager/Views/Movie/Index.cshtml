@@ -13,7 +13,7 @@
         @Html.ActionLink("Create a New Movie", "Create", null, new { @class = "btn btn-primary" })
     </div>
     <div class="col-sm-6 text-right">
-        @using (Html.BeginForm("Index", "Movie", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        @using (Html.BeginForm("Index", "Movie", new { page=1 }, FormMethod.Get, new { @class = "form-inline", role = "form" }))
         {
             <div class="form-group">
                 <label for="directorId">Director: </label>

@@ -33,7 +33,8 @@ namespace PasswordManager.Models.Data
             {
                 var directors =
                     context.Directors
-                        .OrderBy(c => c.Name)
+                        .Where(d => d.Movies.Count() > 1)
+                        .OrderBy(d => d.Name)
                         .ToList();
                 directors.Insert(0, new Director { Id = 0, Name = "-- All --" });
                 return directors;
