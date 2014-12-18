@@ -29,5 +29,7 @@ namespace PasswordManager.Models
         public bool IsTomatoSortDown { get; set; }
         public bool IsIMDBSortUp { get; set; }
         public bool IsIMDBSortDown { get; set; }
+
+        public string SearchString { get; set; }
     }
 }

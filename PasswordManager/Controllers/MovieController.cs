@@ -17,7 +17,7 @@ namespace PasswordManager.Controllers
         }
 
         [Route("Movies/{page:int?}")]
-        public ActionResult Index(int directorId, string sortKey="title", int page = 1)
+        public ActionResult Index(int directorId, string sortKey="title", int page = 1, string searchTerm = "")
         {             
             MovieSortField sortField= MovieSortField.Title;
             bool sortAscending = true;
@@ -61,7 +61,7 @@ namespace PasswordManager.Controllers
 
             var model = new MovieIndexViewModel
             {
-                Movies = repository.GetMoviesByDirectorInPage(directorId, sortField, sortAscending, page, PAGE_SIZE),
+                Movies = repository.GetMoviesByDirectorInPage(directorId, sortField, sortAscending, page, PAGE_SIZE, searchTerm),
                 TotalCount = repository.TotalCount,
 
                 DirectorId = new SelectList(repository.DirectorNames, "Id", "Name", directorId),
@@ -82,7 +82,9 @@ namespace PasswordManager.Controllers
                 IsTomatoSortUp  = (sortField == MovieSortField.Tomatometer && sortAscending),
                 IsTomatoSortDown = (sortField == MovieSortField.Tomatometer && !sortAscending),
                 IsIMDBSortUp    = (sortField == MovieSortField.IMDBRating && sortAscending),
-                IsIMDBSortDown = (sortField == MovieSortField.IMDBRating && !sortAscending)
+                IsIMDBSortDown = (sortField == MovieSortField.IMDBRating && !sortAscending),
+
+                SearchString = searchTerm
             };
             return View(model);
         }

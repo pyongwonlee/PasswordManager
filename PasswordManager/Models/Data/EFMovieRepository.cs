@@ -35,7 +35,7 @@ namespace PasswordManager.Models.Data
                     context.Directors
                         .OrderBy(c => c.Name)
                         .ToList();
-                directors.Insert(0, new Director { Id = 0, Name = "All" });
+                directors.Insert(0, new Director { Id = 0, Name = "-- All --" });
                 return directors;
             }
         }
@@ -50,11 +50,12 @@ namespace PasswordManager.Models.Data
             }
         }
 
-        public IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, MovieSortField sortField, bool sortAscending, int page, int pageSize)
+        public IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, MovieSortField sortField, bool sortAscending, int page, int pageSize, string searchTerm)
         {
             var movies = context.Movies
                .Include(m => m.Director)
-               .Where(m => directorId == 0 || m.DirectorId == directorId);
+               .Where(m =>  (directorId == 0 || m.DirectorId == directorId) &&
+                            (string.IsNullOrEmpty(searchTerm) || m.Title.ToLower().Contains(searchTerm.ToLower()) || m.Director.Name.ToLower().Contains(searchTerm.ToLower())));
 
             switch (sortField)
             {

@@ -12,7 +12,7 @@ namespace PasswordManager.Models.Data
         IEnumerable<Director> DirectorNames { get; }
 
         IEnumerable<Movie> Movies { get; }
-        IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, MovieSortField sortField, bool sortAscending, int page, int pageSize);
+        IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, MovieSortField sortField, bool sortAscending, int page, int pageSize, string searchTerm);
 
         int TotalCount { get; }
 

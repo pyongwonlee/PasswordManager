@@ -9,19 +9,25 @@
 <br />
 
 <div class="row">
-    @Html.ActionLink("Create a New Movie", "Create", null, new { @class = "btn btn-primary" })
-</div>
-<br />
-
-<div class="row">
-    <div class="text-right">
+    <div class="col-sm-6">
+        @Html.ActionLink("Create a New Movie", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-sm-6 text-right">
         @using (Html.BeginForm("Index", "Movie", FormMethod.Get, new { @class = "form-inline", role = "form" }))
         {
-            <label for="directorId">Director: </label>
+            <div class="form-group">
+                <label for="directorId">Director: </label>
             @Html.DropDownList("DirectorId", null, new { @class = "form-control" })
-            <input id="filterByDirector" type="submit" value="Filter By Director" class="hidden" />
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <input type="search" name="searchTerm" class="form-control" value="@Model.SearchString" />
+            </div>
+            <div class="form-group">
+                <input id="filterByCondition" type="submit" value="Search" class="form-control btn btn-info" />
+            </div>
         }
-    </div>
+   </div>
 </div>
 <br />
 
@@ -129,7 +135,7 @@
 
         $(function () {
             $('#DirectorId').change(function (e) {
-                $("#filterByDirector").click();
+                $("#filterByCondition").click();
             });
         });
 
