@@ -16,9 +16,11 @@ namespace PasswordManager.Controllers
             repository = repo;
         }
 
-        [Route("Movies/{page:int?}")]
-        public ActionResult Index(int directorId, string sortKey="title", int page = 1, string searchTerm = "")
-        {             
+        [Route("Movies/{directorId:int=0}/{page:int=1}/{sortKey=title}/{searchTerm?}")]
+        public ActionResult Index(int directorId, int page, string sortKey, string searchTerm)
+        {
+            searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm;
+
             MovieSortField sortField= MovieSortField.Title;
             bool sortAscending = true;
 
@@ -106,7 +108,7 @@ namespace PasswordManager.Controllers
                 if (!repository.Exists(movie.Title, movie.DirectorId))
                 {
                     repository.Add(movie);
-                    return RedirectToAction("Index", new { directorId = 0, page = 1 });
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -139,7 +141,7 @@ namespace PasswordManager.Controllers
                 if (!repository.Exists(movie.Title, movie.DirectorId, movie.Id))
                 {
                     repository.Update(movie);
-                    return RedirectToAction("Index", new { directorId = 0, page = 1 });
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -167,7 +169,7 @@ namespace PasswordManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);
-            return RedirectToAction("Index", new { directorId = 0, page = 1 });
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

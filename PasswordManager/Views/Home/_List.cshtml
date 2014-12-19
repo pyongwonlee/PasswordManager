@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<PasswordManager.Models.Entities.Password>
 
-<div class="passwordList">
+<div id="passwordList" class="passwordList">
     <table class="table table-striped table-hover">
         <tr>
             <th>
@@ -47,7 +47,7 @@
                 </td>
                 <td>
                     @*Html.ActionLink("Details", "Details", new { id = item.AccountId })*@
-                    <a href="@Url.Action("Details", new { id = item.PasswordId })" 
+                    <a href="@Url.Action("Details", new { id = item.PasswordId })"
                        class="btn btn-default btn-sm" data-toggle="modal" data-target="#passwordInfo">
                         Details
                     </a>

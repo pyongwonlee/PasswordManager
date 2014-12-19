@@ -7,9 +7,9 @@
 <h2>Delete a Movie?</h2>
 
 <h3>Are you sure you want to delete  [@Model.Title by @Model.Director.Name]?</h3>
+<hr />
+
 <div>
-    <h4>Movie</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             Director
@@ -45,6 +45,6 @@
 <hr />
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { directorId = 0, page = 1 }, new { @class = "btn btn-link" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-link" })
 </div>
 

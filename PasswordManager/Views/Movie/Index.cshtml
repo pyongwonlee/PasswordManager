@@ -13,11 +13,21 @@
         @Html.ActionLink("Create a New Movie", "Create", null, new { @class = "btn btn-primary" })
     </div>
     <div class="col-sm-6 text-right">
-        @using (Html.BeginForm("Index", "Movie", new { page=1 }, FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        @using (Ajax.BeginForm(
+            null,
+            new { page = 1, sortKey = "title" },
+            new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "movieList"
+            },
+            new { @class = "form-inline", role = "form" }
+            ))
         {
             <div class="form-group">
                 <label for="directorId">Director: </label>
-            @Html.DropDownList("DirectorId", null, new { @class = "form-control" })
+                @Html.DropDownList("DirectorId", null, new { @class = "form-control" })
             </div>
             <br /><br />
             <div class="form-group">
@@ -26,6 +36,11 @@
             <div class="form-group">
                 <input id="filterByCondition" type="submit" value="Search" class="form-control btn btn-info" />
             </div>
+        }
+
+        @using (Html.BeginForm("Index", "Movie", null, FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            
         }
    </div>
 </div>
