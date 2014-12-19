@@ -10,6 +10,8 @@ namespace PasswordManager.Models.Data
 {
     public class EFMovieRepository : IMovieRepository
     {
+        private const int OTHER_DIRECTOR_ID = 90000;
+
         PasswordContext context;
 
         public EFMovieRepository()
@@ -37,6 +39,7 @@ namespace PasswordManager.Models.Data
                         .OrderBy(d => d.Name)
                         .ToList();
                 directors.Insert(0, new Director { Id = 0, Name = "-- All --" });
+                directors.Add(new Director { Id = OTHER_DIRECTOR_ID, Name = "-- Others --" });
                 return directors;
             }
         }
@@ -55,9 +58,9 @@ namespace PasswordManager.Models.Data
         {
             var movies = context.Movies
                .Include(m => m.Director)
-               .Where(m =>  (directorId == 0 || m.DirectorId == directorId) &&
-                            (string.IsNullOrEmpty(searchTerm) || m.Title.ToLower().Contains(searchTerm.ToLower()) || m.Director.Name.ToLower().Contains(searchTerm.ToLower())));
-
+               .Where(m => (directorId == 0 || m.DirectorId == directorId || (directorId == OTHER_DIRECTOR_ID && m.Director.Movies.Count() <= 1)) &&
+                           (string.IsNullOrEmpty(searchTerm) || m.Title.ToLower().Contains(searchTerm.ToLower()) || m.Director.Name.ToLower().Contains(searchTerm.ToLower())));
+            
             switch (sortField)
             {
                 case MovieSortField.Title:
