@@ -4,6 +4,9 @@
     ViewBag.Title = "Edit";
     ViewBag.SumbitTitle = "Save";
 }
+@section Styles {
+    <link href="~/Content/css/select2.css" rel="stylesheet" />
+}
 
 <h2>Edit</h2>
 
@@ -21,6 +24,13 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/select2.min.js"></script>
+    <script>
+            $(document).ready(function () {
+                $("#DirectorId").select2({
+                });
+            });
+    </script>
 }
 
 
