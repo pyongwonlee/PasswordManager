@@ -9,7 +9,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="DirectorId">Director</label>
         <div class="col-md-10">
-                @Html.DropDownListFor(model => model.DirectorId, (SelectList)ViewBag.DirectorDropdown, new { style = "width:280px" })
+                @Html.DropDownListFor(model => model.DirectorId, (SelectList)ViewBag.DirectorDropdown, new { @class="form-control" })
                 @Html.ValidationMessageFor(model => model.DirectorId)
         </div>
     </div>
