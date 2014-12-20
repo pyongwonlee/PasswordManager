@@ -3,9 +3,36 @@
 }
 
 <h2>Export to Files</h2>
+<br />
+<br />
 
+<div class="alert alert-info">
+    <h3>Passwords</h3>
+    <br />
+    <div class="row">
+        <div class="col-sm-4 text-warning">
+            Export all passwords to csv file:
+        </div>
+        <div class="col-sm-8">
+            @Html.ActionLink("Export Passwords to CSV", "ExportPasswordsToCsv", "Export", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
 
-@Html.ActionLink("Export to CSV", "ExportToCsv", "Export", null, new { @class = "btn btn-primary" })
+<hr />
+
+<div class="alert alert-info">
+    <h3>Movies</h3>
+    <br />
+    <div class="row">
+        <div class="col-sm-4 text-warning">
+            Export all movies to csv file:
+        </div>
+        <div class="col-sm-8">
+            @Html.ActionLink("Export Movies to CSV", "ExportMoviesToCsv", "Export", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
 
 
 

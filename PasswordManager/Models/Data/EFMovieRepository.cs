@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using PasswordManager.Models.Enums;
+using PasswordManager.Models.Export;
 
 namespace PasswordManager.Models.Data
 {
@@ -84,6 +85,27 @@ namespace PasswordManager.Models.Data
             }
 
             return movies.ToPagedList(page, pageSize);
+        }
+
+        public IEnumerable<ExportMovieModel> MoviesForExport
+        {
+            get
+            {
+                var movies = context.Movies
+                        .OrderBy(m => m.Title)
+                        .ToList();
+
+                return movies
+                        .Select(m => new ExportMovieModel
+                        {
+                            Title = m.Title,
+                            Director = m.Director.Name,
+                            Year = m.Year,
+                            Tomatometer = m.Tomatometer.HasValue ? string.Format("{0}", m.Tomatometer)  : "",
+                            IMDBRating = m.IMDBRating.HasValue ? string.Format("{0:N1}", m.IMDBRating) : ""
+                        })
+                        .ToList();
+            }
         }
 
         public int TotalCount

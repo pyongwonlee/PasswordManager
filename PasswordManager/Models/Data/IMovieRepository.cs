@@ -1,6 +1,7 @@
 ﻿using PagedList;
 using PasswordManager.Models.Entities;
 using PasswordManager.Models.Enums;
+using PasswordManager.Models.Export;
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +14,8 @@ namespace PasswordManager.Models.Data
 
         IEnumerable<Movie> Movies { get; }
         IPagedList<Movie> GetMoviesByDirectorInPage(int directorId, MovieSortField sortField, bool sortAscending, int page, int pageSize, string searchTerm);
+
+        IEnumerable<ExportMovieModel> MoviesForExport { get; }
 
         int TotalCount { get; }
 

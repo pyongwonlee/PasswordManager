@@ -13,11 +13,13 @@ namespace PasswordManager.Controllers
 {
     public class ExportController : AutheticatedController
     {
-        IPasswordHelperRepository repository;
+        IPasswordHelperRepository passwordRepository;
+        IMovieRepository movieRepository;
 
-        public ExportController(IPasswordHelperRepository repo)
+        public ExportController(IPasswordHelperRepository repo, IMovieRepository repo1)
         {
-            repository = repo;
+            passwordRepository = repo;
+            movieRepository = repo1;
         }
 
         public ActionResult Index()
@@ -25,13 +27,13 @@ namespace PasswordManager.Controllers
             return View();
         }
 
-        public ActionResult ExportToCsv()
+        [Route("Export/Passwords")]
+        public ActionResult ExportPasswordsToCsv()
         {
             using(var sw = new StringWriter() )
             {
                 var csvWriter = new CsvWriter(sw);
-                //csvWriter.WriteRecords<ExportAccountModel>(repository.PasswordsForExport);
-                csvWriter.WriteRecords(repository.PasswordListForExport);
+                csvWriter.WriteRecords(passwordRepository.PasswordListForExport);
 
                 return this.File(new UTF8Encoding().GetBytes(sw.ToString()), 
                             "text/csv", 
@@ -39,11 +41,26 @@ namespace PasswordManager.Controllers
             }
         }
 
+        [Route("Export/Movies")]
+        public ActionResult ExportMoviesToCsv()
+        {
+            using (var sw = new StringWriter())
+            {
+                var csvWriter = new CsvWriter(sw);
+                csvWriter.WriteRecords(movieRepository.MoviesForExport);
+
+                return this.File(new UTF8Encoding().GetBytes(sw.ToString()),
+                            "text/csv",
+                            string.Format("Movies-{0}.csv", DateTime.Now.ToString("g").Replace("/", "-").Replace(":", "_").Replace(" ", "-")));
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                repository.Dispose();
+                passwordRepository.Dispose();
+                movieRepository.Dispose();
             }
             base.Dispose(disposing);
         }
