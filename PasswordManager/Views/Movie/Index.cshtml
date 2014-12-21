@@ -5,7 +5,14 @@
 }
 
 <h2>Movies</h2>
-<h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
+<div class="row">
+    <div class="col-sm-6">
+        <h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
+    </div>
+    <div class="col-sm-6 text-right">
+        @Html.ActionLink("Refresh List", "Index", "Movie", new { page = 1 }, new { @class = "btn btn-warning" })
+    </div>
+</div>
 <br />
 
 <div class="row">
@@ -36,11 +43,6 @@
             <div class="form-group">
                 <input id="filterByCondition" type="submit" value="Search" class="form-control btn btn-info" />
             </div>
-        }
-
-        @using (Html.BeginForm("Index", "Movie", null, FormMethod.Get, new { @class = "form-inline", role = "form" }))
-        {
-            
         }
    </div>
 </div>
