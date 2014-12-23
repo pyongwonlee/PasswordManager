@@ -21,9 +21,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-list"></i> List</a></li>
+                    <li><a href="@Url.Action("Index", "Home")" title="Passwords List"><i class="fa fa-list"></i></a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-lock"></i> Passwords <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Passwords Admin"><i class="fa fa-lock"></i> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Categories", "Index", "Category")</li>
                             <li>@Html.ActionLink("Companies", "Index", "Company", new { page = 1 }, null)</li>
@@ -31,13 +31,13 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-video-camera"></i> Movies <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Movies"><i class="fa fa-video-camera"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Movies", "Index", "Movie", new { page = 1, directorId = 0, sortKey = "title", searchTerm = "" }, null)</li>
                             <li>@Html.ActionLink("Directors", "Index", "Director", new { page = 1 }, null)</li>
                         </ul>
                     </li>
-                    <li><a href="@Url.Action("Index", "Export")"><i class="fa fa-sign-out"></i> Export</a></li>
+                    <li><a href="@Url.Action("Index", "Export")" title="Export"><i class="fa fa-sign-out"></i></a></li>
                     <li><a href="@Url.Action("About", "Home")" title="About"><i class="fa fa-info-circle"></i></a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
