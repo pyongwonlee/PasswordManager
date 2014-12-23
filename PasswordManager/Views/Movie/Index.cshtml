@@ -10,7 +10,7 @@
         <h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
     </div>
     <div class="col-sm-6 text-right">
-        @Html.ActionLink("Refresh List", "Index", "Movie", new { page = 1 }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Refresh List", "Index", "Movie", new { page = 1, directorId = 0, sortKey = "title", searchTerm = "" }, new { @class = "btn btn-warning" })
     </div>
 </div>
 <br />

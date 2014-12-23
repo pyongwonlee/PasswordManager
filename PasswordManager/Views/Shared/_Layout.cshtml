@@ -33,7 +33,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Movies", "Index", "Movie", new { page = 1 }, null)</li>
+                            <li>@Html.ActionLink("Movies", "Index", "Movie", new { page = 1, directorId = 0, sortKey = "title", searchTerm = "" }, null)</li>
                             <li>@Html.ActionLink("Directors", "Index", "Director", new { page = 1 }, null)</li>
                         </ul>
                     </li>
