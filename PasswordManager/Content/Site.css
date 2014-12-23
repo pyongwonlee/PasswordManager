@@ -3,14 +3,20 @@
     padding-bottom: 20px;
 }
 
+/* Menus */
 div.navbar-header > a.navbar-brand {
-    margin-right: 50px;
+    margin-right: 100px;
+    padding-top: 10px;
 }
 
+a.icon-menu {
+    margin-right: 30px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 20px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
