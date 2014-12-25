@@ -86,8 +86,8 @@
                         @Html.DisplayFor(modelItem => item.IMDBRating)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        <a href="@Url.Action("Edit", "Movie", new { id = item.Id })" title="Edit" class="icon-menu"><i class="fa fa-edit"></i></a>
+                        <a href="@Url.Action("Delete", "Movie", new { id = item.Id })" title="Delete" class="icon-menu"><i class="fa fa-remove"></i></a>
                     </td>
                 </tr>
             }

@@ -9,9 +9,14 @@ div.navbar-header > a.navbar-brand {
     padding-top: 10px;
 }
 
-a.icon-menu {
+div.navbar-header a.icon-menu {
     margin-right: 30px;
 }
+
+table.movie-table a.icon-menu {
+    margin-right: 10px;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
