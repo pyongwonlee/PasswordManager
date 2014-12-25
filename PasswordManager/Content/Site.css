@@ -9,12 +9,16 @@ div.navbar-header > a.navbar-brand {
     padding-top: 10px;
 }
 
-div.navbar-header a.icon-menu {
-    margin-right: 30px;
+ul.main-toolbar a.icon-menu {
+    margin-right: 15px;
 }
 
 table.movie-table a.icon-menu, div.director-info a.icon-menu {
     margin-right: 10px;
+}
+
+div.director-info div.director-name > h3 {
+    margin-top: 5px; margin-left: 15px;
 }
 
 /* Set padding to keep content from hitting the edges */
