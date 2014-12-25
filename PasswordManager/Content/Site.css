@@ -13,7 +13,7 @@ div.navbar-header a.icon-menu {
     margin-right: 30px;
 }
 
-table.movie-table a.icon-menu {
+table.movie-table a.icon-menu, div.director-info a.icon-menu {
     margin-right: 10px;
 }
 
