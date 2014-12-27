@@ -13,11 +13,16 @@ ul.main-toolbar a.icon-menu {
     margin-right: 15px;
 }
 
-table.movie-table a.icon-menu, div.director-info a.icon-menu {
+table.movie-table a.icon-menu,
+table.company-list a.icon-menu,
+div.director-info a.icon-menu,
+div.category-info a.icon-menu,
+div.password-info a.icon-menu {
     margin-right: 10px;
 }
 
-div.director-info div.director-name > h3 {
+div.director-info div.director-name > h3,
+div.password-info div.company-name > h3 {
     margin-top: 5px; margin-left: 15px;
 }
 

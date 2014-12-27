@@ -19,6 +19,7 @@ namespace PasswordManager.Models.Entities
         public int? Tomatometer { get; set; }
 
         [Display(Name = "IMDB Rating")]
+        [DisplayFormat(DataFormatString="{0:N1}", ApplyFormatInEditMode=false)]
         [Range(0.0, 10.0)]
         public double? IMDBRating { get; set; }
 

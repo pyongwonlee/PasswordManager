@@ -12,7 +12,7 @@
 </div>
 <br />
 
-<table class="table table-striped">
+<table class="table table-striped company-list">
     <tr>
         <th>
             Name
@@ -45,8 +45,8 @@
                 @Html.DisplayFor(modelItem => item.WebAddress)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CompanyId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId })
+                <a href="@Url.Action("Edit", "Company", new { id = item.CompanyId })" title="Edit" class="icon-menu"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Delete", "Company", new { id = item.CompanyId })" title="Delete" class="icon-menu"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
     }
