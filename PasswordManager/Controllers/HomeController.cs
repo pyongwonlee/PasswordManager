@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Helpers;
+using PasswordManager.Models;
 using PasswordManager.Models.Data;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -28,7 +29,11 @@ namespace PasswordManager.Controllers
             {
                 return PartialView("_List", model);
             }
-            return View(model);
+            return View(new PasswordListViewModel 
+                {
+                    Passwords = model,
+                    SearchString = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm
+                });
         }
 
         [Authorize]
