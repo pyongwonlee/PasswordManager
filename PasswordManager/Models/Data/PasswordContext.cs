@@ -11,5 +11,9 @@ namespace PasswordManager.Models.Data
 
         public DbSet<Director> Directors { get; set; }
         public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Center> Centers { get; set; }
     }
 }
