@@ -66,7 +66,7 @@ namespace PasswordManager.Models.Data
             var centers = context.Centers
                .Include(c => c.City)
                .Include(c => c.City.Province)
-               .Where(c => (string.IsNullOrWhiteSpace(province) || province == "All" || province == c.City.Province.Abbreviation) &&
+               .Where(c => (string.IsNullOrEmpty(province) || province == "All" || province == c.City.Province.Abbreviation) &&
                            (string.IsNullOrEmpty(searchTerm) || 
                             c.Name.ToLower().Contains(searchTerm.ToLower()) || 
                             c.City.Name.ToLower().Contains(searchTerm.ToLower()) ||

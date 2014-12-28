@@ -53,7 +53,7 @@ namespace PasswordManager.Models.Data
             return context.Cities
                 .Include(c => c.Province)
                 .Include(c => c.Centers)
-                .Where(c => (string.IsNullOrWhiteSpace(province) || province == "All" || province == c.Province.Abbreviation))
+                .Where(c => (string.IsNullOrEmpty(province) || province == "All" || province == c.Province.Abbreviation))
                 .OrderBy(c => c.Name)
                 .ToPagedList(page, pageSize);
         }

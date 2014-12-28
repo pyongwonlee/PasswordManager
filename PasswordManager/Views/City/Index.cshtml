@@ -1,0 +1,76 @@
+﻿@model PasswordManager.Models.CityIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cities for Art Centres</h2>
+<h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
+<br />
+
+<div class="row">
+    @Html.ActionLink("Create a New City", "Create", null, new { @class = "btn btn-primary" })
+</div>
+<br />
+
+<div class="row">
+    <div class="text-right">
+        @using (Html.BeginForm("Index", "City", new { page = 1 }, FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            <label for="province">Province: </label>
+            @Html.DropDownList("province", null, new { @class = "form-control" })
+            <input id="filterByProvince" type="submit" value="Filter By Province" class="hidden" />
+        }
+    </div>
+    <br />
+</div>
+
+<div class="text-right text-warning">
+    @Model.Cities.GetMetaData().TotalItemCount Cities
+</div>
+@foreach (var item in Model.Cities)
+{
+    <div class="well well-sm container director-info">
+        <div class="row">
+            <div class="col-sm-10 director-name">
+                <h3>@item.Name, @item.Province.Abbreviation</h3>
+            </div>
+            <div class="col-sm-2">
+                <a href="@Url.Action("Edit", "City", new { id = item.Id })" title="Edit" class="icon-menu"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Delete", "City", new { id = item.Id })" title="Delete" class="icon-menu"><i class="fa fa-trash"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1 text-right">
+                <span class="badge">@item.Centers.Count()</span>
+            </div>
+            <div class="col-sm-10">
+                <div class="alert alert-info">
+                    <ul>
+                        @foreach (var center in item.Centers)
+                        {
+                            <li><a href="@center.WebAddress">@center.Name</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.PagedListPager(Model.Cities, page => Url.Action("Index", new { page }),
+        PagedListRenderOptions.Classic)
+</div>
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            $('#province').change(function (e) {
+                $("#filterByProvince").click();
+            });
+        });
+
+    </script>
+}

@@ -37,6 +37,13 @@
                             <li>@Html.ActionLink("Directors", "Index", "Director", new { page = 1 }, null)</li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown" title="Art Centres"><i class="fa fa-paint-brush fa-2x"></i><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Art Centres", "Index", "Center", new { province = "All", searchTerm = "" }, null)</li>
+                            <li>@Html.ActionLink("Cities", "Index", "City", new { province = "All", page = 1 }, null)</li>
+                        </ul>
+                    </li>
                     <li><a href="@Url.Action("Index", "Export")" title="Export" class="icon-menu"><i class="fa fa-sign-out fa-2x"></i></a></li>
                     <li><a href="@Url.Action("About", "Home")" title="About" class="icon-menu"><i class="fa fa-info-circle fa-2x"></i></a></li>
                 </ul>
