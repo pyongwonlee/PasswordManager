@@ -1,0 +1,54 @@
+﻿@model PasswordManager.Models.ArtCenterIndexViewModel
+
+<div id="movieList" class="movieList">
+    <table class="table table-striped movie-table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    City, Province
+                </th>
+                <th>
+                    Web Site
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Note
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Centers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @item.City.Name, @item.City.Province.Abbreviation
+                    </td>
+                    <td>
+                        <a href="@item.WebAddress" target="_blank">@item.WebAddress</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "ArtCenter", new { id = item.Id })" title="Edit" class="icon-menu"><i class="fa fa-edit"></i></a>
+                        <a href="@Url.Action("Delete", "ArtCenter", new { id = item.Id })" title="Delete" class="icon-menu"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

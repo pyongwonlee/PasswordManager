@@ -1,0 +1,19 @@
+﻿@model PasswordManager.Models.Entities.Center
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.SumbitTitle = "Create";
+}
+
+<h2>Create a New Art Centre</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.Partial("_CenterForm", @Model)
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { province = "All" }, new { @class = "btn btn-link" })
+</div>

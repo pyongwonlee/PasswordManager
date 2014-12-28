@@ -1,0 +1,51 @@
+﻿@model PasswordManager.Models.ArtCenterIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Art Centres</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
+    </div>
+    <div class="col-sm-6 text-right">
+        <a href="@Url.Action("Index", "ArtCenter", new { province = "All", searchTerm = "" })" title="Refresh" class="btn btn-warning"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-sm-6">
+        @Html.ActionLink("Add a New Art Centre", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-sm-6 text-right">
+        @using (Html.BeginForm("Index", "ArtCenter", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            <div class="form-group">
+                <label for="province">Province: </label>
+                @Html.DropDownList("Province", null, new { @class = "form-control" })
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <input type="search" name="searchTerm" class="form-control" value="@Model.SearchString" />
+                <button id="filterByCondition" type="submit" class="form-control btn btn-info" title="Search"><i class="fa fa-search"></i></button>
+            </div>
+        }
+    </div>
+</div>
+<br />
+
+@Html.Partial("_CenterList", Model)
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            $('#Province').change(function (e) {
+                $("#filterByCondition").click();
+            });
+        });
+
+    </script>
+}

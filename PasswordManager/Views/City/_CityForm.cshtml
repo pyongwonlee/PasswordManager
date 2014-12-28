@@ -3,11 +3,11 @@
     
 <div class="form-horizontal">
     <hr />
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="CompanyId">Province</label>
+        <label class="control-label col-md-2" for="ProvinceId">Province</label>
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.ProvinceId, (SelectList)ViewBag.ProvinceIdDropdown, String.Empty, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.ProvinceId)

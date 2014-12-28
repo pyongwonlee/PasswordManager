@@ -88,6 +88,11 @@ namespace PasswordManager.Controllers
 
                 SearchString = searchTerm
             };
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_MovieList", model);
+            }
             return View(model);
         }
 
