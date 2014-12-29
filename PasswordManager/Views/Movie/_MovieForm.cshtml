@@ -3,46 +3,46 @@
 
 <div class="form-horizontal">
     <hr />
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
 
     <div class="form-group">
         <label class="control-label col-md-2" for="DirectorId">Director</label>
         <div class="col-md-6">
                 @Html.DropDownListFor(model => model.DirectorId, (SelectList)ViewBag.DirectorDropdown, new { @class="form-control", style="width:280px" })
-                @Html.ValidationMessageFor(model => model.DirectorId)
+                @Html.ValidationMessageFor(model => model.DirectorId, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-6">
-            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Title)
+            @Html.TextBoxFor(model => model.Title, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-6">
-            @Html.TextBoxFor(model => model.Year, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Year)
+            @Html.TextBoxFor(model => model.Year, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Tomatometer, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Tomatometer, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-6">
-            @Html.TextBoxFor(model => model.Tomatometer, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Tomatometer)
+            @Html.TextBoxFor(model => model.Tomatometer, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Tomatometer, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.IMDBRating, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.IMDBRating, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-6">
-            @Html.TextBoxFor(model => model.IMDBRating, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IMDBRating)
+            @Html.TextBoxFor(model => model.IMDBRating, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IMDBRating, "", new { @class = "text-danger" })
         </div>
     </div>
 
