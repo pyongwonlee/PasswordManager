@@ -5,6 +5,11 @@
     ViewBag.SumbitTitle = "Save";
 }
 
+@section Styles {
+    <link href="~/Content/select2/select2.css" rel="stylesheet" />
+    <link href="~/Content/select2/select2-bootstrap.css" rel="stylesheet" />
+}
+
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
@@ -19,3 +24,12 @@
 </div>
 
 
+@section Scripts {
+    <script src="~/Scripts/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#CityId').select2({
+            });
+        });
+    </script>
+}
