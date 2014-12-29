@@ -1,0 +1,27 @@
+﻿@model PasswordManager.Models.Entities.Center
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Art Centre</h2>
+
+<h3>Are you sure you want to delete  [@Model.Name in @Model.City.Name, @Model.City.Province.Abbreviation]?</h3>
+<div>
+    <h4>Center</h4>
+    <hr />
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>
+
+<hr />
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { province = "All" }, new { @class = "btn btn-link" })
+</div>

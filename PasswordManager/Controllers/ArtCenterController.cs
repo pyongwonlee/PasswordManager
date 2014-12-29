@@ -88,6 +88,26 @@ namespace PasswordManager.Controllers
             return View(center);
         }
 
+        [Route("ArtCenter/Delete/{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            Center center = repository.Find(id);
+            if (center == null)
+            {
+                return HttpNotFound();
+            }
+            return View(center);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Route("ArtCenter/Delete/{id:int}")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            repository.Delete(id);
+            return RedirectToAction("Index", new { province = "All", page = 1 });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
