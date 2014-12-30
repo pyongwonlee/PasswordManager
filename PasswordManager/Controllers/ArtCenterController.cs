@@ -15,7 +15,7 @@ namespace PasswordManager.Controllers
             repository = repo;
         }
 
-        [Route("ArtCenters/{searchTerm?}")]
+        [Route("ArtCenters")]
         public ActionResult Index(string province, string searchTerm)
         {
             province = string.IsNullOrEmpty(province) ? "All" : province;
@@ -52,10 +52,18 @@ namespace PasswordManager.Controllers
         [Route("ArtCenter/Create")]
         public ActionResult Create(Center center)
         {
+            
             if (ModelState.IsValid)
             {
-                repository.Add(center);
-                return RedirectToAction("Index", new { province = "All" });
+                if (!repository.Exists(center.Name))
+                {
+                    repository.Add(center);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("Name", "The art centre name already exists.");
+                }
             }
 
             ViewBag.CityIdDropdown = new SelectList(repository.Cities, "Id", "Name", center.CityId);
@@ -81,8 +89,15 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Update(center);
-                return RedirectToAction("Index", new { province = "All", page = 1 });
+                if (!repository.Exists(center.Name, center.Id))
+                {
+                    repository.Update(center);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("Name", "The art centre name already exists.");
+                }
             }
             ViewBag.CityIdDropdown = new SelectList(repository.Cities, "Id", "Name", center.CityId); 
             return View(center);
@@ -105,7 +120,7 @@ namespace PasswordManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);
-            return RedirectToAction("Index", new { province = "All", page = 1 });
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
