@@ -11,3 +11,34 @@
     <h4>Please Login to see your account information.</h4>
 </div>
 
+<div class="row">
+    <div class="col-sm-4">
+        <h4>Passwords</h4>
+        <hr />
+        <div class="well well-sm">
+            <ul>
+                <li>Manage IDs and Passwords</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <h4>Movies</h4>
+        <hr />
+        <div class="well well-sm">
+            <ul>
+                <li>@Html.ActionLink("Movies", "Index", "Movie")</li>
+                <li>@Html.ActionLink("Directors", "Index", "Director", new { page = 1 }, null)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <h4>Art Centres</h4>
+        <hr />
+        <div class="well well-sm">
+            <ul>
+                <li>@Html.ActionLink("Art Centres", "Index", "ArtCenter")</li>
+                <li>@Html.ActionLink("Cities", "Index", "City", new { province = "All", page = 1 }, null)</li>
+            </ul>
+        </div>
+    </div>
+</div>
