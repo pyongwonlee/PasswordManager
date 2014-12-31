@@ -16,8 +16,8 @@ namespace PasswordManager.Controllers
             repository = repo;
         }
 
-        [Route("Movies/{directorId:int=0}/{page:int=1}/{sortKey=title}/{searchTerm?}")]
-        public ActionResult Index(int directorId, int page, string sortKey, string searchTerm)
+        [Route("Movies")]
+        public ActionResult Index(int directorId=0, int page=1, string sortKey="title", string searchTerm="")
         {
             searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm;
 
