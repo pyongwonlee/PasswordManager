@@ -21,7 +21,7 @@ namespace PasswordManager.Controllers
         }
 
         [Authorize]
-        [Route("Home/Search/{searchTerm?}")]
+        [Route("Home/PasswordList")]
         public ActionResult Index(string searchTerm)
         {
             var model = this.repository.GetPasswords("", searchTerm);
