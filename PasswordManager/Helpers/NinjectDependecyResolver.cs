@@ -39,6 +39,8 @@ namespace PasswordManager.Helpers
 
             kernel.Bind<ICityRepository>().To<EFCityRepository>();
             kernel.Bind<IArtCenterRepository>().To<EFArtCenterRepository>();
+
+            kernel.Bind<IPreferenceRepository>().To<EFPreferenceRepository>();
         }
     }
 }
