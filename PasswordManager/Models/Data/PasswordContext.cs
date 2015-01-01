@@ -15,5 +15,7 @@ namespace PasswordManager.Models.Data
         public DbSet<Province> Provinces { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Center> Centers { get; set; }
+
+        public DbSet<Preference> Preferences { get; set; }
     }
 }

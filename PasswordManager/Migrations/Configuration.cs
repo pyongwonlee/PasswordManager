@@ -16,7 +16,8 @@ namespace PasswordManager.Migrations
         protected override void Seed(PasswordManager.Models.Data.PasswordContext context)
         {
             //  This method will be called after migrating to the latest version.
-            context.Provinces.AddOrUpdate(
+            context.Provinces.AddOrUpdate
+            (
                 p => p.Abbreviation,
                 new Province { Name = "Alberta", Abbreviation = "AB" },
                 new Province { Name = "British Columbia", Abbreviation = "BC" },
@@ -31,6 +32,14 @@ namespace PasswordManager.Migrations
                 new Province { Name = "Northwest Territories", Abbreviation = "NT" },
                 new Province { Name = "Yukon", Abbreviation = "YT" },
                 new Province { Name = "Nunavut", Abbreviation = "NU" }
+            );
+
+            context.Preferences.AddOrUpdate
+            (
+                p => p.Key,
+                new Preference { Key = "CategoryId", Value = 0 },
+                new Preference { Key = "DirectorId", Value = 0 },
+                new Preference { Key = "ProvinceId", Value = 0 }
             );
         }
     }
