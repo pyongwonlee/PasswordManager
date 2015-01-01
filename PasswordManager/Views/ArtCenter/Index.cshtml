@@ -10,7 +10,7 @@
         <h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
     </div>
     <div class="col-sm-6 text-right">
-        <a href="@Url.Action("Index", "ArtCenter")" title="Refresh" class="btn btn-warning"><i class="fa fa-refresh"></i></a>
+        <a href="@Url.Action("Refresh", "ArtCenter")" title="Refresh" class="btn btn-warning"><i class="fa fa-refresh"></i></a>
     </div>
 </div>
 <br />
@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-6 text-right">
 @using (Ajax.BeginForm(
-    actionName: null,
+    actionName: "Filter",
     routeValues: null,
     ajaxOptions: new AjaxOptions
             {

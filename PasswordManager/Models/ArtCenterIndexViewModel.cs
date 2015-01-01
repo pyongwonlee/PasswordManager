@@ -11,7 +11,6 @@ namespace PasswordManager.Models
         public int TotalCount { get; set; }
 
         public SelectList Province { get; set; }
-        public string SelectedProvince { get; set; }
         
         public string SearchString { get; set; }
     }

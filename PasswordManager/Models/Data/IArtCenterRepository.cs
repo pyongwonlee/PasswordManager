@@ -12,7 +12,7 @@ namespace PasswordManager.Models.Data
         IEnumerable<City> Cities { get; }
 
         IEnumerable<Center> Centers { get; }
-        IEnumerable<Center> GetCentersByProvince(string province, string searchTerm);
+        IEnumerable<Center> GetCentersByProvince(int provinceId, string searchTerm);
         
         int TotalCount { get; }
 

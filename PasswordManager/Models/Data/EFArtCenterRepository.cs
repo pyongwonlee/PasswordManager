@@ -61,12 +61,12 @@ namespace PasswordManager.Models.Data
             }
         }
 
-        public IEnumerable<Center> GetCentersByProvince(string province, string searchTerm)
+        public IEnumerable<Center> GetCentersByProvince(int provinceId, string searchTerm)
         {
             var centers = context.Centers
                .Include(c => c.City)
                .Include(c => c.City.Province)
-               .Where(c => (string.IsNullOrEmpty(province) || province == "All" || province == c.City.Province.Abbreviation) &&
+               .Where(c => (provinceId == 0 || provinceId == c.City.Province.Id) &&
                            (string.IsNullOrEmpty(searchTerm) || 
                             c.Name.ToLower().Contains(searchTerm.ToLower()) || 
                             c.City.Name.ToLower().Contains(searchTerm.ToLower()) ||

@@ -8,17 +8,19 @@ namespace PasswordManager.Controllers
 {
     public class ArtCenterController : Controller
     {
-        IArtCenterRepository repository;
+        private IArtCenterRepository repository;
+        private IPreferenceRepository preference;
 
-        public ArtCenterController(IArtCenterRepository repo)
+        public ArtCenterController(IArtCenterRepository repo, IPreferenceRepository pref)
         {
             repository = repo;
+            preference = pref;
         }
 
         [Route("ArtCenters")]
-        public ActionResult Index(string province, string searchTerm)
+        public ActionResult Index(string searchTerm)
         {
-            province = string.IsNullOrEmpty(province) ? "All" : province;
+            int province = preference.ProvinceId; 
             searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm;
 
             var model = new ArtCenterIndexViewModel
@@ -26,8 +28,7 @@ namespace PasswordManager.Controllers
                 Centers = repository.GetCentersByProvince(province, searchTerm),
                 TotalCount = repository.TotalCount,
 
-                Province = new SelectList(repository.ProvinceNames, "Abbreviation", "Name", province),
-                SelectedProvince = province,
+                Province = new SelectList(repository.ProvinceNames, "Id", "Name", province),
 
                 SearchString = searchTerm
             };
@@ -36,9 +37,22 @@ namespace PasswordManager.Controllers
             {
                 return PartialView("_CenterList", model);
             }
-            return View(model);
+            return View("Index", model);
         }
 
+        [Route("ArtCenter/Refresh")]
+        public ActionResult Refresh()
+        {
+            preference.ProvinceId = 0;
+            return Index("");
+        }
+
+        [Route("ArtCenter/Filter")]
+        public ActionResult Filter(int province, string searchTerm)
+        {
+            preference.ProvinceId = province;
+            return Index(searchTerm);
+        }
 
         [Route("ArtCenter/Create")]
         public ActionResult Create()

@@ -1,6 +1,9 @@
 ﻿@model PasswordManager.Models.ArtCenterIndexViewModel
 
 <div id="movieList" class="movieList">
+    <div class="text-right text-warning">
+        @Model.Centers.Count() Centres
+    </div>
     <table class="table table-striped movie-table">
         <thead>
             <tr>
