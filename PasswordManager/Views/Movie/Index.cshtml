@@ -10,7 +10,7 @@
         <h4 class="text-info">(Total Count: @Model.TotalCount )</h4>
     </div>
     <div class="col-sm-6 text-right">
-        <a href="@Url.Action("Index", "Movie", new { page = 1, directorId = 0, sortKey = "title", searchTerm = "" })" title="Refresh" class="btn btn-warning"><i class="fa fa-refresh"></i></a>
+        <a href="@Url.Action("Refresh", "Movie", new { page = 1, directorId = 0, sortKey = "title", searchTerm = "" })" title="Refresh" class="btn btn-warning"><i class="fa fa-refresh"></i></a>
     </div>
 </div>
 <br />
@@ -21,15 +21,15 @@
     </div>
     <div class="col-sm-6 text-right">
         @using (Ajax.BeginForm(
-            null,
-            new { page = 1, sortKey = "title" },
-            new AjaxOptions
+            actionName: "Filter",
+            routeValues: null,
+            ajaxOptions: new AjaxOptions
             {
                 HttpMethod = "get",
                 InsertionMode = InsertionMode.Replace,
                 UpdateTargetId = "movieList"
             },
-            new { @class = "form-inline", role = "form" }
+            htmlAttributes: new { @class = "form-inline", role = "form" }
             ))
         {
             <div class="form-group">

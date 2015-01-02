@@ -8,17 +8,20 @@ namespace PasswordManager.Controllers
 {
     public class MovieController : Controller
     {
-        IMovieRepository repository;
-        int PAGE_SIZE = 50;
+        private IMovieRepository repository;
+        private IPreferenceRepository preference;
+        private const int PAGE_SIZE = 50;
 
-        public MovieController(IMovieRepository repo)
+        public MovieController(IMovieRepository repo, IPreferenceRepository pref)
         {
             repository = repo;
+            preference = pref;
         }
 
         [Route("Movies")]
-        public ActionResult Index(int directorId=0, int page=1, string sortKey="title", string searchTerm="")
+        public ActionResult Index(int page=1, string sortKey="title", string searchTerm="")
         {
+            int directorId = preference.DirectorId; 
             searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm;
 
             MovieSortField sortField= MovieSortField.Title;
@@ -93,7 +96,26 @@ namespace PasswordManager.Controllers
             {
                 return PartialView("_MovieList", model);
             }
-            return View(model);
+            return View("Index", model);
+        }
+
+        [Route("Movie/Refresh")]
+        public ActionResult Refresh()
+        {
+            int page = 1;
+            string sortKey = "title";
+            string searchTerm = "";
+            preference.DirectorId = 0;
+            return Index(page, sortKey, searchTerm);
+        }
+
+        [Route("Movie/Filter")]
+        public ActionResult Filter(int directorId, string searchTerm = "")
+        {
+            int page = 1;
+            string sortKey = "title";
+            preference.DirectorId = directorId;
+            return Index(page, sortKey, searchTerm);
         }
 
         [Route("Movie/Create")]
