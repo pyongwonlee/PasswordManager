@@ -22,7 +22,7 @@ namespace PasswordManager.Controllers
         public ActionResult Index(int page=1, string sortKey="title", string searchTerm="")
         {
             int directorId = preference.DirectorId; 
-            searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm;
+            searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm.Trim();
 
             MovieSortField sortField= MovieSortField.Title;
             bool sortAscending = true;
@@ -132,6 +132,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(movie);
                 if (!repository.Exists(movie.Title, movie.DirectorId))
                 {
                     repository.Add(movie);
@@ -165,6 +166,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(movie);
                 if (!repository.Exists(movie.Title, movie.DirectorId, movie.Id))
                 {
                     repository.Update(movie);
@@ -197,6 +199,11 @@ namespace PasswordManager.Controllers
         {
             repository.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        private void Trim(Movie movie)
+        {
+            movie.Title = movie.Title.Trim();
         }
 
         protected override void Dispose(bool disposing)

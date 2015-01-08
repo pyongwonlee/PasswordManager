@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Models.Entities;
+using PasswordManager.Models.Export;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +14,9 @@ namespace PasswordManager.Models.Data
 
         IEnumerable<Center> Centers { get; }
         IEnumerable<Center> GetCentersByProvince(int provinceId, string searchTerm);
-        
+
+        IEnumerable<ExportArtCenterModel> ArtCentersForExport { get; }
+
         int TotalCount { get; }
 
         Center Find(int id);
