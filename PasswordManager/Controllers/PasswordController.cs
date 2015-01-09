@@ -45,6 +45,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(pw);
                 repository.Add(pw);
                 return RedirectToAction("Index", new { categoryId = 0, page = 1 });
             }
@@ -72,6 +73,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(pw);
                 repository.Update(pw);
                 return RedirectToAction("Index", new { categoryId = 0, page = 1 });
             }
@@ -97,6 +99,37 @@ namespace PasswordManager.Controllers
         {
             repository.Delete(id);
             return RedirectToAction("Index", new { categoryId = 0, page = 1 });
+        }
+
+        [NonAction]
+        private void Trim(Password pw)
+        {
+            pw.UserName = pw.UserName.Trim();
+            pw.PasswordCode = pw.PasswordCode.Trim();
+            if (pw.Note1 != null)
+            {
+                pw.Note1 = pw.Note1.Trim();
+            }
+            if (pw.Note2 != null)
+            {
+                pw.Note2 = pw.Note2.Trim();
+            }
+            if (pw.Note3 != null)
+            {
+                pw.Note3 = pw.Note3.Trim();
+            }
+            if (pw.Note4 != null)
+            {
+                pw.Note4 = pw.Note4.Trim();
+            }
+            if (pw.Note5 != null)
+            {
+                pw.Note5 = pw.Note5.Trim();
+            }
+            if (pw.Comment != null)
+            {
+                pw.Comment = pw.Comment.Trim();
+            }
         }
 
         protected override void Dispose(bool disposing)

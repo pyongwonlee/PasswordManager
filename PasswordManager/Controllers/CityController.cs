@@ -48,6 +48,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(city);
                 repository.Add(city);
                 return RedirectToAction("Index", new { province = "All", page = 1 });
             }
@@ -75,6 +76,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(city);
                 repository.Update(city);
                 return RedirectToAction("Index", new { province = "All", page = 1 });
             }
@@ -100,6 +102,12 @@ namespace PasswordManager.Controllers
         {
             repository.Delete(id);
             return RedirectToAction("Index", new { province = "All", page = 1 });
+        }
+
+        [NonAction]
+        private void Trim(City city)
+        {
+            city.Name = city.Name.Trim();
         }
 
         protected override void Dispose(bool disposing)

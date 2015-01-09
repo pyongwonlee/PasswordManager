@@ -43,6 +43,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(director);
                 if (!repository.Exists(director.Name))
                 {
                     repository.Add(director);
@@ -74,6 +75,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(director);
                 if (!repository.Exists(director.Name, director.Id))
                 {
                     repository.Update(director);
@@ -105,6 +107,12 @@ namespace PasswordManager.Controllers
         {
             repository.Delete(id);
             return RedirectToAction("Index", new { page = 1 });
+        }
+
+        [NonAction]
+        private void Trim(Director director)
+        {
+            director.Name = director.Name.Trim();
         }
 
         protected override void Dispose(bool disposing)

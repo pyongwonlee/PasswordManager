@@ -38,6 +38,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(company);
                 repository.Add(company);
                 return RedirectToAction("Index");
             }
@@ -66,6 +67,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(company);
                 repository.Update(company);
                 return RedirectToAction("Index");
             }
@@ -91,6 +93,17 @@ namespace PasswordManager.Controllers
         {
             repository.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [NonAction]
+        private void Trim(Company company)
+        {
+            company.Name = company.Name.Trim();
+            company.Description = company.Description.Trim();
+            if (company.WebAddress != null)
+            {
+                company.WebAddress = company.WebAddress.Trim();
+            }
         }
 
         protected override void Dispose(bool disposing)

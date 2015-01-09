@@ -37,6 +37,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(category);
                 repository.Add(category);
                 return RedirectToAction("Index");
             }
@@ -63,6 +64,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(category);
                 repository.Update(category);
                 return RedirectToAction("Index");
             }
@@ -87,6 +89,12 @@ namespace PasswordManager.Controllers
         {
             repository.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [NonAction]
+        private void Trim(Category category)
+        {
+            category.Name = category.Name.Trim();
         }
 
         protected override void Dispose(bool disposing)

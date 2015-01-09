@@ -201,6 +201,7 @@ namespace PasswordManager.Controllers
             return RedirectToAction("Index");
         }
 
+        [NonAction]
         private void Trim(Movie movie)
         {
             movie.Title = movie.Title.Trim();

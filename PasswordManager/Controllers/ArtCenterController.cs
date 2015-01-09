@@ -21,7 +21,7 @@ namespace PasswordManager.Controllers
         public ActionResult Index(string searchTerm)
         {
             int province = preference.ProvinceId; 
-            searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm;
+            searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm.Trim();
 
             var model = new ArtCenterIndexViewModel
             {
@@ -66,9 +66,9 @@ namespace PasswordManager.Controllers
         [Route("ArtCenter/Create")]
         public ActionResult Create(Center center)
         {
-            
             if (ModelState.IsValid)
             {
+                Trim(center);
                 if (!repository.Exists(center.Name))
                 {
                     repository.Add(center);
@@ -103,6 +103,7 @@ namespace PasswordManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                Trim(center);
                 if (!repository.Exists(center.Name, center.Id))
                 {
                     repository.Update(center);
@@ -135,6 +136,24 @@ namespace PasswordManager.Controllers
         {
             repository.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [NonAction]
+        private void Trim(Center center)
+        {
+            center.Name = center.Name.Trim();
+            if (center.WebAddress != null)
+            {
+                center.WebAddress = center.WebAddress.Trim();
+            }
+            if (center.Description != null)
+            {
+                center.Description = center.Description.Trim();
+            }
+            if (center.Note != null)
+            {
+                center.Note = center.Note.Trim();
+            }
         }
 
         protected override void Dispose(bool disposing)

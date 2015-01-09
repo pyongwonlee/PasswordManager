@@ -32,7 +32,7 @@ namespace PasswordManager.Controllers
             return View(new PasswordListViewModel 
                 {
                     Passwords = model,
-                    SearchString = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm
+                    SearchString = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm.Trim()
                 });
         }
 
