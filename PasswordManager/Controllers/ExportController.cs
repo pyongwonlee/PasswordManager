@@ -15,11 +15,13 @@ namespace PasswordManager.Controllers
     {
         IPasswordHelperRepository passwordRepository;
         IMovieRepository movieRepository;
+        IArtCenterRepository artcenterRepository;
 
-        public ExportController(IPasswordHelperRepository repo, IMovieRepository repo1)
+        public ExportController(IPasswordHelperRepository repo, IMovieRepository repo1, IArtCenterRepository repo2)
         {
             passwordRepository = repo;
             movieRepository = repo1;
+            artcenterRepository = repo2;
         }
 
         public ActionResult Index()
@@ -52,6 +54,20 @@ namespace PasswordManager.Controllers
                 return this.File(new UTF8Encoding().GetBytes(sw.ToString()),
                             "text/csv",
                             string.Format("Movies-{0}.csv", DateTime.Now.ToString("g").Replace("/", "-").Replace(":", "_").Replace(" ", "-")));
+            }
+        }
+
+        [Route("Export/ArtCenters")]
+        public ActionResult ExportArtCentersToCsv()
+        {
+            using (var sw = new StringWriter())
+            {
+                var csvWriter = new CsvWriter(sw);
+                csvWriter.WriteRecords(artcenterRepository.ArtCentersForExport);
+
+                return this.File(new UTF8Encoding().GetBytes(sw.ToString()),
+                            "text/csv",
+                            string.Format("ArtCentres-{0}.csv", DateTime.Now.ToString("g").Replace("/", "-").Replace(":", "_").Replace(" ", "-")));
             }
         }
 
