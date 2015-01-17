@@ -65,7 +65,7 @@ namespace PasswordManager.Models.Data
             switch (sortField)
             {
                 case MovieSortField.Title:
-                    movies = sortAscending ? movies.OrderBy(m => m.Title.Replace("The ", "").Replace("the ", "")) : movies.OrderByDescending(m => m.Title.Replace("The ", "").Replace("the ", ""));
+                    movies = sortAscending ? movies.OrderBy(m => m.Title.Replace("The ", "").Replace("the ", "").Replace("A ", "")) : movies.OrderByDescending(m => m.Title.Replace("The ", "").Replace("the ", "").Replace("A ", ""));
                     break;
                 case MovieSortField.Director:
                     movies = sortAscending ? movies.OrderBy(m => m.Director.Name) : movies.OrderByDescending(m => m.Director.Name);
