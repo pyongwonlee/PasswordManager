@@ -56,3 +56,13 @@
     @Html.PagedListPager(Model.Directors, page => Url.Action("Index", new { page }),
         PagedListRenderOptions.Classic)
 </div>
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            $("#movie-link").addClass("active");
+        });
+
+    </script>
+}

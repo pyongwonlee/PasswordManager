@@ -21,8 +21,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav main-toolbar">
-                    <li><a href="@Url.Action("Index", "Home")" title="Passwords List" class="icon-menu"><i class="fa fa-list fa-2x"></i></a></li>
-                    <li class="dropdown">
+                    <li id="pwlist-link"><a href="@Url.Action("Index", "Home")" title="Passwords List" class="icon-menu"><i class="fa fa-list fa-2x"></i></a></li>
+                    <li class="dropdown" id="pw-link">
                         <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown" title="Passwords Admin"><i class="fa fa-lock fa-2x"></i> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Categories", "Index", "Category")</li>
@@ -30,22 +30,22 @@
                             <li>@Html.ActionLink("Passwords", "Index", "Password", new { categoryId = 0, page = 1 }, null)</li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" id="movie-link">
                         <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown" title="Movies"><i class="fa fa-video-camera fa-2x"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Movies", "Index", "Movie")</li>
                             <li>@Html.ActionLink("Directors", "Index", "Director", new { page = 1 }, null)</li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" id="art-link">
                         <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown" title="Art Centres"><i class="fa fa-paint-brush fa-2x"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Art Centres", "Index", "ArtCenter")</li>
                             <li>@Html.ActionLink("Cities", "Index", "City", new { province = "All", page = 1 }, null)</li>
                         </ul>
                     </li>
-                    <li><a href="@Url.Action("Index", "Export")" title="Export" class="icon-menu"><i class="fa fa-sign-out fa-2x"></i></a></li>
-                    <li><a href="@Url.Action("About", "Home")" title="About" class="icon-menu"><i class="fa fa-info-circle fa-2x"></i></a></li>
+                    <li id="export-link"><a href="@Url.Action("Index", "Export")" title="Export" class="icon-menu"><i class="fa fa-sign-out fa-2x"></i></a></li>
+                    <li id="about-link"><a href="@Url.Action("About", "Home")" title="About" class="icon-menu"><i class="fa fa-info-circle fa-2x"></i></a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

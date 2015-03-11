@@ -40,6 +40,8 @@
     <script>
 
         $(function () {
+            $("#pwlist-link").addClass("active");
+
             $('#passwordInfo').on('hidden.bs.modal', function (e) {
                 $(this).removeData('bs.modal');
             });
