@@ -8,11 +8,16 @@ namespace PasswordManager.Models.Data
 {
     public class EFDirectorRepository : IDirectorRepository
     {
-        PasswordContext context;
+        private PasswordContext context;
 
         public EFDirectorRepository()
+            : this(new PasswordContext())
         {
-            context = new PasswordContext();
+        }
+
+        public EFDirectorRepository(PasswordContext ctx)
+        {
+            context = ctx;
         }
 
         public IEnumerable<Director> Directors

@@ -5,17 +5,17 @@ namespace PasswordManager.Models.Data
 {
     public class PasswordContext : DbContext
     {
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<Password> Passwords { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Password> Passwords { get; set; }
 
-        public DbSet<Director> Directors { get; set; }
-        public DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<Director> Directors { get; set; }
+        public virtual DbSet<Movie> Movies { get; set; }
 
-        public DbSet<Province> Provinces { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<Center> Centers { get; set; }
+        public virtual DbSet<Province> Provinces { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Center> Centers { get; set; }
 
-        public DbSet<Preference> Preferences { get; set; }
+        public virtual DbSet<Preference> Preferences { get; set; }
     }
 }
