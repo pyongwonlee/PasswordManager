@@ -31,26 +31,22 @@ namespace PasswordUnitTest.Models.Data
                 new Director { Id = 25, Name = "YYY" }
             }.AsQueryable();
 
-            mockSet.As<IQueryable<Director>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Director>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Director>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Director>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            
+            mockSet.As<IDbSet<Director>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IDbSet<Director>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IDbSet<Director>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IDbSet<Director>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());            
         }
 
         [TestMethod]
-        public void Directors_Property_Count()
+        public void DirectorRepository_Property_TotalCount()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();
-
             mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
-
             var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
 
             // Act
-            var count = directorRepository.Directors.Count();
+            var count = directorRepository.TotalCount;
 
             // Assert
             Assert.AreEqual(7, count);
@@ -61,9 +57,7 @@ namespace PasswordUnitTest.Models.Data
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();
-
             mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
-
             var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
 
             // Act
@@ -75,33 +69,42 @@ namespace PasswordUnitTest.Models.Data
         }
         
         [TestMethod]
-        public void Find_Existing_Director()
-        {
-            //// Arrange
-            //var mockPasswordContext = new Mock<PasswordContext>();
-
-            //mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
-
-            //var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
-
-            //// Act
-            //var directorEEE = directorRepository.Find(5);
-
-            //// Assert
-            //Assert.IsNotNull(directorEEE);
-            //Assert.AreEqual("EEE", directorEEE.Name);
-
-        }
-
-        [TestMethod]
-        public void Add_Calls_SaveChanges()
+        public void DirectorRepository_Method_Exists_Success()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();
+            mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
+            var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
 
+            // Act
+            var exists = directorRepository.Exists("EEE");
+
+            // Assert
+            Assert.IsTrue(exists);
+        }
+
+        [TestMethod]
+        public void DirectorRepository_Method_Exists_Fail()
+        {
+            // Arrange
+            var mockPasswordContext = new Mock<PasswordContext>();
+            mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
+            var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
+
+            // Act
+            var exists = directorRepository.Exists("MMM");
+
+            // Assert
+            Assert.IsFalse(exists);
+        }
+
+        [TestMethod]
+        public void DirectorRepository_Add_Calls_SaveChanges()
+        {
+            // Arrange
+            var mockPasswordContext = new Mock<PasswordContext>();
             mockPasswordContext.Setup(x => x.SaveChanges());
             mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
-
             var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
 
             // Act
