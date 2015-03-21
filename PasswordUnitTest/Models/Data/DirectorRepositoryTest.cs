@@ -120,7 +120,7 @@ namespace PasswordUnitTest.Models.Data
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void DirectorRepository_Add_GetDirectorsInPage_InvalidPageNumber()
+        public void DirectorRepository_GetDirectorsInPage_InvalidPageNumber()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();
@@ -138,7 +138,7 @@ namespace PasswordUnitTest.Models.Data
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void DirectorRepository_Add_GetDirectorsInPage_InvalidPageSize()
+        public void DirectorRepository_GetDirectorsInPage_InvalidPageSize()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();

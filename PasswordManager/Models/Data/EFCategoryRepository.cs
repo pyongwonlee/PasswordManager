@@ -10,8 +10,13 @@ namespace PasswordManager.Models.Data
         PasswordContext context;
 
         public EFCategoryRepository()
+            : this(new PasswordContext())
         {
-            context = new PasswordContext();
+        }
+
+        public EFCategoryRepository(PasswordContext ctx)
+        {
+            context = ctx;
         }
 
         public IEnumerable<Category> Categories
@@ -49,6 +54,12 @@ namespace PasswordManager.Models.Data
         public Category Find(int id)
         {
             return context.Categories.Find(id);
+        }
+
+        public bool Exists(string name)
+        {
+            return context.Categories
+                .Where(d => d.Name == name).Count() > 0;
         }
 
         public int Add(Category category)

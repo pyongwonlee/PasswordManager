@@ -10,5 +10,7 @@ namespace PasswordManager.Models.Data
         IEnumerable<Category> CategoryNames { get; }
         
         int GetCategoryId(string name);
+
+        bool Exists(string name);
     }
 }

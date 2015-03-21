@@ -119,7 +119,7 @@ namespace PasswordUnitTest.Models.Data
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ArtCenterRepository_Add_GetCentersByProvince_InvalidProvince()
+        public void ArtCenterRepository_GetCentersByProvince_InvalidProvince()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();

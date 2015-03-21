@@ -120,7 +120,7 @@ namespace PasswordUnitTest.Models.Data
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void CityRepository_Add_GetCitiesInPage_InvalidPageNumber()
+        public void CityRepository_GetCitiesInPage_InvalidPageNumber()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();
@@ -138,7 +138,7 @@ namespace PasswordUnitTest.Models.Data
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void CityRepository_Add_GetCitiesInPage_InvalidPageSize()
+        public void CityRepository_GetCitiesInPage_InvalidPageSize()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();
