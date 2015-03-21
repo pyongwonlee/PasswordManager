@@ -3,6 +3,7 @@ using System.Linq;
 using System.Data.Entity;
 using PasswordManager.Models.Entities;
 using PagedList;
+using System;
 
 namespace PasswordManager.Models.Data
 {
@@ -32,6 +33,11 @@ namespace PasswordManager.Models.Data
 
         public IPagedList<Director> GetDirectorsInPage(int page, int pageSize, string searchTerm)
         {
+            if(page < 0 || pageSize < 0)
+            {
+                throw new ArgumentException("Invalide page number or page size");
+            };
+
             return context.Directors
                 .Include(d => d.Movies)
                 .Where(d => (string.IsNullOrEmpty(searchTerm) || d.Name.ToLower().Contains(searchTerm.ToLower())))

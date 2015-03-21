@@ -49,6 +49,7 @@ namespace PasswordUnitTest.Models.Data
             var count = directorRepository.TotalCount;
 
             // Assert
+            mockPasswordContext.VerifyGet(x => x.Directors);
             Assert.AreEqual(7, count);
         }
 
@@ -80,6 +81,7 @@ namespace PasswordUnitTest.Models.Data
             var exists = directorRepository.Exists("EEE");
 
             // Assert
+            mockPasswordContext.VerifyGet(x => x.Directors);
             Assert.IsTrue(exists);
         }
 
@@ -95,6 +97,7 @@ namespace PasswordUnitTest.Models.Data
             var exists = directorRepository.Exists("MMM");
 
             // Assert
+            mockPasswordContext.VerifyGet(x => x.Directors);
             Assert.IsFalse(exists);
         }
 
@@ -111,7 +114,44 @@ namespace PasswordUnitTest.Models.Data
             directorRepository.Add(new Director());
 
             // Assert
+            mockPasswordContext.VerifyGet(x => x.Directors);
             mockPasswordContext.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void DirectorRepository_Add_GetDirectorsInPage_InvalidPageNumber()
+        {
+            // Arrange
+            var mockPasswordContext = new Mock<PasswordContext>();
+            mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
+            var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
+
+            int page = -1;
+            int pageSize = 5;
+
+            // Act
+            directorRepository.GetDirectorsInPage(page, pageSize, "");
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void DirectorRepository_Add_GetDirectorsInPage_InvalidPageSize()
+        {
+            // Arrange
+            var mockPasswordContext = new Mock<PasswordContext>();
+            mockPasswordContext.Setup(x => x.Directors).Returns(mockSet.Object);
+            var directorRepository = new EFDirectorRepository(mockPasswordContext.Object);
+
+            int page = 1;
+            int pageSize = -1;
+
+            // Act
+            directorRepository.GetDirectorsInPage(page, pageSize, "");
+
+            // Assert
         }
     }
 }
