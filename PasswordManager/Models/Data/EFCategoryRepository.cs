@@ -38,6 +38,14 @@ namespace PasswordManager.Models.Data
             }
         }
 
+        public int TotalCount
+        {
+            get
+            {
+                return context.Categories.Count();
+            }
+        }
+
         public Category Find(int id)
         {
             return context.Categories.Find(id);

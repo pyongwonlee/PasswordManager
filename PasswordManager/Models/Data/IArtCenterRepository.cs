@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PasswordManager.Models.Data
 {
-    public interface IArtCenterRepository : IDisposable
+    public interface IArtCenterRepository : IRepository<Center>
     {
         IEnumerable<Province> Provinces { get; }
         IEnumerable<Province> ProvinceNames { get; }
@@ -16,16 +16,8 @@ namespace PasswordManager.Models.Data
         IEnumerable<Center> GetCentersByProvince(int provinceId, string searchTerm);
 
         IEnumerable<ExportArtCenterModel> ArtCentersForExport { get; }
-
-        int TotalCount { get; }
-
-        Center Find(int id);
-
+                
         bool Exists(string name);
         bool Exists(string name, int currentId);
-
-        int Add(Center center);
-        void Update(Center center);
-        void Delete(int id);
     }
 }

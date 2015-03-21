@@ -36,7 +36,7 @@ namespace PasswordManager.Models.Data
             if(page < 0 || pageSize < 0)
             {
                 throw new ArgumentException("Invalide page number or page size");
-            };
+            }
 
             return context.Directors
                 .Include(d => d.Movies)

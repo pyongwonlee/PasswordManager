@@ -12,10 +12,15 @@ namespace PasswordManager.Models.Data
     public class EFArtCenterRepository : IArtCenterRepository
     {
         PasswordContext context;
-
+        
         public EFArtCenterRepository()
+            : this(new PasswordContext())
         {
-            context = new PasswordContext();
+        }
+
+        public EFArtCenterRepository(PasswordContext ctx)
+        {
+            context = ctx;
         }
 
         public IEnumerable<Province> Provinces
@@ -63,6 +68,11 @@ namespace PasswordManager.Models.Data
 
         public IEnumerable<Center> GetCentersByProvince(int provinceId, string searchTerm)
         {
+            if (provinceId < 0)
+            {
+                throw new ArgumentException("Invalide province id");
+            }
+
             var centers = context.Centers
                .Include(c => c.City)
                .Include(c => c.City.Province)

@@ -44,6 +44,14 @@ namespace PasswordManager.Models.Data
                 .ToList();
         }
 
+        public int TotalCount
+        {
+            get
+            {
+                return context.Companies.Count();
+            }
+        }
+
         public Company Find(int id)
         {
             return context.Companies.Find(id);
