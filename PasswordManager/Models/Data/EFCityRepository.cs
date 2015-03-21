@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using PasswordManager.Models.Entities;
@@ -11,8 +12,13 @@ namespace PasswordManager.Models.Data
         PasswordContext context;
 
         public EFCityRepository()
+            : this(new PasswordContext())
         {
-            context = new PasswordContext();
+        }
+
+        public EFCityRepository(PasswordContext ctx)
+        {
+            context = ctx;
         }
 
         public IEnumerable<Province> Provinces
@@ -50,6 +56,11 @@ namespace PasswordManager.Models.Data
 
         public IPagedList<City> GetCitiesInPage(string province, int page, int pageSize)
         {
+            if (page < 0 || pageSize < 0)
+            {
+                throw new ArgumentException("Invalide page number or page size");
+            }
+
             return context.Cities
                 .Include(c => c.Province)
                 .Include(c => c.Centers)

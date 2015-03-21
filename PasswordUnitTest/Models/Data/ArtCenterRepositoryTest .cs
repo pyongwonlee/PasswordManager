@@ -61,11 +61,11 @@ namespace PasswordUnitTest.Models.Data
             var centerRepository = new EFArtCenterRepository(mockPasswordContext.Object);
 
             // Act
-            var firstDirector = centerRepository.Centers.FirstOrDefault();
+            var firstCenter = centerRepository.Centers.FirstOrDefault();
 
             // Assert
-            Assert.IsNotNull(firstDirector);
-            Assert.AreEqual("AAA", firstDirector.Name);
+            Assert.IsNotNull(firstCenter);
+            Assert.AreEqual("AAA", firstCenter.Name);
         }
         
         [TestMethod]
