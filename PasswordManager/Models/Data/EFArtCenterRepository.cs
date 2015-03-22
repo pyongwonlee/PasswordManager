@@ -70,7 +70,7 @@ namespace PasswordManager.Models.Data
         {
             if (provinceId < 0)
             {
-                throw new ArgumentException("Invalide province id");
+                throw new ArgumentException("Invalid province id");
             }
 
             var centers = context.Centers

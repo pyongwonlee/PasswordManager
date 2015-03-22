@@ -20,10 +20,19 @@ namespace PasswordManager.Helpers
         public const string IMDBRatingDesc = "imdb_desc";
     }
 
+    public class MoiveSortResult
+    {
+        public MovieSortField Field { get; set; }
+        public bool IsAscending { get; set; }
+    }
+
     public static class MovieSortManager
     {
-        public static void Sort(string sortKey, out MovieSortField sortField, out bool sortAscending)
+        public static MoiveSortResult Sort(string sortKey)
         {
+            MovieSortField sortField = MovieSortField.Title;
+            bool sortAscending = true;
+
             if (string.IsNullOrWhiteSpace(sortKey))
             {
                 throw new ArgumentException("Invalide sort key");
@@ -65,6 +74,12 @@ namespace PasswordManager.Helpers
                     sortField = MovieSortField.Title; sortAscending = true;
                     break;
             }
+
+            return new MoiveSortResult
+            {
+                Field = sortField,
+                IsAscending = sortAscending
+            };
         }
     }
 }

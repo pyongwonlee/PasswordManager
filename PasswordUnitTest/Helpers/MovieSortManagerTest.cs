@@ -12,112 +12,98 @@ namespace PasswordUnitTest.Helpers
         public void MovieSortManager_Sort_By_Title()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = MovieSortNames.Title;
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.Title, sortField);
-            Assert.IsTrue(sortAscending);
+            Assert.AreEqual(MovieSortField.Title, sort.Field);
+            Assert.IsTrue(sort.IsAscending);
         }
 
         [TestMethod]
         public void MovieSortManager_Sort_By_Title_Desc()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = MovieSortNames.TitleDesc;
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.Title, sortField);
-            Assert.IsFalse(sortAscending);
+            Assert.AreEqual(MovieSortField.Title, sort.Field);
+            Assert.IsFalse(sort.IsAscending);
         }
 
         [TestMethod]
         public void MovieSortManager_Sort_By_Director()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = MovieSortNames.Director;
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.Director, sortField);
-            Assert.IsTrue(sortAscending);
+            Assert.AreEqual(MovieSortField.Director, sort.Field);
+            Assert.IsTrue(sort.IsAscending);
         }
 
         [TestMethod]
         public void MovieSortManager_Sort_By_Year_Desc()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = MovieSortNames.YearDesc;
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.Year, sortField);
-            Assert.IsFalse(sortAscending);
+            Assert.AreEqual(MovieSortField.Year, sort.Field);
+            Assert.IsFalse(sort.IsAscending);
         }
 
         [TestMethod]
         public void MovieSortManager_Sort_By_Tomatometer()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = MovieSortNames.Tomatometer;
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.Tomatometer, sortField);
-            Assert.IsTrue(sortAscending);
+            Assert.AreEqual(MovieSortField.Tomatometer, sort.Field);
+            Assert.IsTrue(sort.IsAscending);
         }
 
         [TestMethod]
         public void MovieSortManager_Sort_By_IMDBRating_Desc()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = MovieSortNames.IMDBRatingDesc;
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.IMDBRating, sortField);
-            Assert.IsFalse(sortAscending);
+            Assert.AreEqual(MovieSortField.IMDBRating, sort.Field);
+            Assert.IsFalse(sort.IsAscending);
         }
 
         [TestMethod]
         public void MovieSortManager_Sort_By_Wrong_Key()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = "Bogus";
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.Title, sortField);
-            Assert.IsTrue(sortAscending);
+            Assert.AreEqual(MovieSortField.Title, sort.Field);
+            Assert.IsTrue(sort.IsAscending);
         }
 
         [TestMethod]
@@ -125,16 +111,14 @@ namespace PasswordUnitTest.Helpers
         public void MovieSortManager_Sort_By_Null_Key()
         {
             // Arrange
-            MovieSortField sortField;
-            bool sortAscending;
             string sortKey = null;
 
             // Act
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             // Assert
-            Assert.AreEqual(MovieSortField.Title, sortField);
-            Assert.IsTrue(sortAscending);
+            Assert.AreEqual(MovieSortField.Title, sort.Field);
+            Assert.IsTrue(sort.IsAscending);
         }
     }
 }

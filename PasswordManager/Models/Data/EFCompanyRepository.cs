@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using PasswordManager.Models.Entities;
@@ -10,8 +11,13 @@ namespace PasswordManager.Models.Data
         PasswordContext context;
 
         public EFCompanyRepository()
+            : this(new PasswordContext())
         {
-            context = new PasswordContext();
+        }
+
+        public EFCompanyRepository(PasswordContext ctx)
+        {
+            context = ctx;
         }
 
         public IEnumerable<Category> Categories
@@ -37,6 +43,11 @@ namespace PasswordManager.Models.Data
 
         public IEnumerable<Company> GetCompaniesByCategory(int categoryId)
         {
+            if (categoryId < 0)
+            {
+                throw new ArgumentException("Invalid category id");
+            }
+
             return context.Companies
                 .Where(c => c.CategoryId == categoryId)
                 .Include(c => c.Category)
@@ -55,6 +66,12 @@ namespace PasswordManager.Models.Data
         public Company Find(int id)
         {
             return context.Companies.Find(id);
+        }
+
+        public bool Exists(string name)
+        {
+            return context.Companies
+                .Where(d => d.Name == name).Count() > 0;
         }
 
         public int Add(Company company)

@@ -58,7 +58,7 @@ namespace PasswordManager.Models.Data
         {
             if (page < 0 || pageSize < 0)
             {
-                throw new ArgumentException("Invalide page number or page size");
+                throw new ArgumentException("Invalid page number or page size");
             }
 
             return context.Cities

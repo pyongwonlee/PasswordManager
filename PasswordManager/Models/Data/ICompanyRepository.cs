@@ -10,5 +10,7 @@ namespace PasswordManager.Models.Data
 
         IEnumerable<Company> Companies { get; }
         IEnumerable<Company> GetCompaniesByCategory(int categoryId);
+
+        bool Exists(string name);
     }
 }

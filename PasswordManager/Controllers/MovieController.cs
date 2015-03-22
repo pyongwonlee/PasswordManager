@@ -25,14 +25,11 @@ namespace PasswordManager.Controllers
             int directorId = preference.DirectorId; 
             searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm.Trim();
 
-            MovieSortField sortField;
-            bool sortAscending;
-
-            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
+            MoiveSortResult sort = MovieSortManager.Sort(sortKey);
 
             var model = new MovieIndexViewModel
             {
-                Movies = repository.GetMoviesByDirectorInPage(directorId, sortField, sortAscending, page, PAGE_SIZE, searchTerm),
+                Movies = repository.GetMoviesByDirectorInPage(directorId, sort.Field, sort.IsAscending, page, PAGE_SIZE, searchTerm),
                 TotalCount = repository.TotalCount,
 
                 DirectorId = new SelectList(repository.DirectorNames, "Id", "Name", directorId),
@@ -44,16 +41,16 @@ namespace PasswordManager.Controllers
                 TomatoSort      = (sortKey == MovieSortNames.Tomatometer) ? MovieSortNames.TomatometerDesc : MovieSortNames.Tomatometer,
                 IMDBSort        = (sortKey == MovieSortNames.IMDBRating) ? MovieSortNames.IMDBRatingDesc : MovieSortNames.IMDBRating,
 
-                IsTitleSortUp   = (sortField == MovieSortField.Title && sortAscending),
-                IsTitleSortDown = (sortField == MovieSortField.Title && !sortAscending),
-                IsDirectorSortUp    = (sortField == MovieSortField.Director && sortAscending),
-                IsDirectorSortDown  = (sortField == MovieSortField.Director && !sortAscending),
-                IsYearSortUp    = (sortField == MovieSortField.Year && sortAscending),
-                IsYearSortDown  = (sortField == MovieSortField.Year && !sortAscending),
-                IsTomatoSortUp  = (sortField == MovieSortField.Tomatometer && sortAscending),
-                IsTomatoSortDown = (sortField == MovieSortField.Tomatometer && !sortAscending),
-                IsIMDBSortUp    = (sortField == MovieSortField.IMDBRating && sortAscending),
-                IsIMDBSortDown = (sortField == MovieSortField.IMDBRating && !sortAscending),
+                IsTitleSortUp = (sort.Field == MovieSortField.Title && sort.IsAscending),
+                IsTitleSortDown = (sort.Field == MovieSortField.Title && !sort.IsAscending),
+                IsDirectorSortUp = (sort.Field == MovieSortField.Director && sort.IsAscending),
+                IsDirectorSortDown = (sort.Field == MovieSortField.Director && !sort.IsAscending),
+                IsYearSortUp = (sort.Field == MovieSortField.Year && sort.IsAscending),
+                IsYearSortDown = (sort.Field == MovieSortField.Year && !sort.IsAscending),
+                IsTomatoSortUp = (sort.Field == MovieSortField.Tomatometer && sort.IsAscending),
+                IsTomatoSortDown = (sort.Field == MovieSortField.Tomatometer && !sort.IsAscending),
+                IsIMDBSortUp = (sort.Field == MovieSortField.IMDBRating && sort.IsAscending),
+                IsIMDBSortDown = (sort.Field == MovieSortField.IMDBRating && !sort.IsAscending),
 
                 SearchString = searchTerm
             };
