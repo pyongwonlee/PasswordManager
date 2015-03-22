@@ -54,7 +54,7 @@ namespace PasswordUnitTest.Models.Data
         }
 
         [TestMethod]
-        public void DirectorRepository_Directors_Property_OrderBy()
+        public void DirectorRepository_Property_Directors_OrderBy()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();

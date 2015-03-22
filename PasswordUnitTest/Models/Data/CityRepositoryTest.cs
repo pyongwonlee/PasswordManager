@@ -54,7 +54,7 @@ namespace PasswordUnitTest.Models.Data
         }
 
         [TestMethod]
-        public void CityRepository_Cities_Property_OrderBy()
+        public void CityRepository_Property_Cities_OrderBy()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();

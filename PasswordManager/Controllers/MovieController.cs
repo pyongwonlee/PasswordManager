@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using PasswordManager.Models.Entities;
 using PasswordManager.Models.Enums;
 using PasswordManager.Models;
+using PasswordManager.Helpers;
 
 namespace PasswordManager.Controllers
 {
@@ -24,45 +25,10 @@ namespace PasswordManager.Controllers
             int directorId = preference.DirectorId; 
             searchTerm = string.IsNullOrEmpty(searchTerm) ? "" : searchTerm.Trim();
 
-            MovieSortField sortField= MovieSortField.Title;
-            bool sortAscending = true;
+            MovieSortField sortField;
+            bool sortAscending;
 
-            switch(sortKey)
-            {
-                case "title":
-                    sortField= MovieSortField.Title; sortAscending = true;
-                    break;
-                case "title_desc":
-                    sortField = MovieSortField.Title; sortAscending = false;
-                    break;
-                case "director":
-                    sortField = MovieSortField.Director; sortAscending = true;
-                    break;
-                case "director_desc":
-                    sortField = MovieSortField.Director; sortAscending = false;
-                    break;
-                case "year":
-                    sortField = MovieSortField.Year; sortAscending = true;
-                    break;
-                case "year_desc":
-                    sortField = MovieSortField.Year; sortAscending = false;
-                    break;
-                case "tomato":
-                    sortField = MovieSortField.Tomatometer; sortAscending = true;
-                    break;
-                case "tomato_desc":
-                    sortField = MovieSortField.Tomatometer; sortAscending = false;
-                    break;
-                case "imdb":
-                    sortField = MovieSortField.IMDBRating; sortAscending = true;
-                    break;
-                case "imdb_desc":
-                    sortField = MovieSortField.IMDBRating; sortAscending = false;
-                    break;
-                default:
-                    sortField = MovieSortField.Title; sortAscending = true;
-                    break;
-            }
+            MovieSortManager.Sort(sortKey, out sortField, out sortAscending);
 
             var model = new MovieIndexViewModel
             {
@@ -72,11 +38,11 @@ namespace PasswordManager.Controllers
                 DirectorId = new SelectList(repository.DirectorNames, "Id", "Name", directorId),
                 SelectedDirectorId = directorId,
 
-                TitleSort       = (sortKey == "title_desc") ? "title" : "title_desc",
-                DirectorSort    = (sortKey == "director_desc") ? "director" : "director_desc",
-                YearSort        = (sortKey == "year_desc") ? "year" : "year_desc",
-                TomatoSort      = (sortKey == "tomato_desc") ? "tomato" : "tomato_desc",
-                IMDBSort        = (sortKey == "imdb_desc") ? "imdb" : "imdb_desc",
+                TitleSort       = (sortKey == MovieSortNames.Title) ? MovieSortNames.TitleDesc : MovieSortNames.Title,
+                DirectorSort    = (sortKey == MovieSortNames.Director) ? MovieSortNames.DirectorDesc : MovieSortNames.Director,
+                YearSort        = (sortKey == MovieSortNames.Year) ? MovieSortNames.YearDesc : MovieSortNames.Year,
+                TomatoSort      = (sortKey == MovieSortNames.Tomatometer) ? MovieSortNames.TomatometerDesc : MovieSortNames.Tomatometer,
+                IMDBSort        = (sortKey == MovieSortNames.IMDBRating) ? MovieSortNames.IMDBRatingDesc : MovieSortNames.IMDBRating,
 
                 IsTitleSortUp   = (sortField == MovieSortField.Title && sortAscending),
                 IsTitleSortDown = (sortField == MovieSortField.Title && !sortAscending),

@@ -53,7 +53,7 @@ namespace PasswordUnitTest.Models.Data
         }
 
         [TestMethod]
-        public void ArtCenters_Property_OrderBy()
+        public void ArtCenterRepository_Property_Centers_OrderBy()
         {
             // Arrange
             var mockPasswordContext = new Mock<PasswordContext>();
