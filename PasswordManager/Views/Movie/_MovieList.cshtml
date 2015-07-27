@@ -96,7 +96,7 @@
     </table>
 
     <div class="row">
-        @Html.PagedListPager(Model.Movies, page => Url.Action("Index", new { directorId = Model.SelectedDirectorId, page }),
+        @Html.PagedListPager(Model.Movies, page => Url.Action("Index", new { directorId = Model.SelectedDirectorId, sortKey = Model.SortKey, page = page }),
         PagedListRenderOptions.Classic)
     </div>
 </div>

@@ -35,6 +35,7 @@ namespace PasswordManager.Controllers
                 DirectorId = new SelectList(repository.DirectorNames, "Id", "Name", directorId),
                 SelectedDirectorId = directorId,
 
+                SortKey         = sortKey,
                 TitleSort       = (sortKey == MovieSortNames.Title) ? MovieSortNames.TitleDesc : MovieSortNames.Title,
                 DirectorSort    = (sortKey == MovieSortNames.Director) ? MovieSortNames.DirectorDesc : MovieSortNames.Director,
                 YearSort        = (sortKey == MovieSortNames.Year) ? MovieSortNames.YearDesc : MovieSortNames.Year,

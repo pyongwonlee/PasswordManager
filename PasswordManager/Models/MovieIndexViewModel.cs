@@ -12,6 +12,7 @@ namespace PasswordManager.Models
 
         public SelectList DirectorId { get; set; }
         public int SelectedDirectorId { get; set; }
+        public string SortKey { get; set; }
 
         public string TitleSort { get; set; }
         public string DirectorSort { get; set; }
