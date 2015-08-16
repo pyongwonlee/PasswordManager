@@ -31,7 +31,7 @@ namespace PasswordManager.Helpers
         {
             kernel.Bind<ICategoryRepository>().To<EFCategoryRepository>();
             kernel.Bind<ICompanyRepository>().To<EFCompanyRepository>();
-            kernel.Bind<IPasswordRepository>().To<EFPasswordtRepository>();
+            kernel.Bind<IPasswordRepository>().To<EFPasswordRepository>();
             kernel.Bind<IPasswordHelperRepository>().To<EFPasswordHelperRepository>();
 
             kernel.Bind<IDirectorRepository>().To<EFDirectorRepository>();
@@ -39,6 +39,8 @@ namespace PasswordManager.Helpers
 
             kernel.Bind<ICityRepository>().To<EFCityRepository>();
             kernel.Bind<IArtCenterRepository>().To<EFArtCenterRepository>();
+
+            kernel.Bind<IBookRepository>().To<EFBookRepository>();
 
             kernel.Bind<IPreferenceRepository>().To<EFPreferenceRepository>();
         }

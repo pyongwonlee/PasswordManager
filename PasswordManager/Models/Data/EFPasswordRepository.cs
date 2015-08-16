@@ -6,11 +6,11 @@ using PagedList;
 
 namespace PasswordManager.Models.Data
 {
-    public class EFPasswordtRepository : IPasswordRepository
+    public class EFPasswordRepository : IPasswordRepository
     {
         PasswordContext context;
 
-        public EFPasswordtRepository()
+        public EFPasswordRepository()
         {
             context = new PasswordContext();
         }
