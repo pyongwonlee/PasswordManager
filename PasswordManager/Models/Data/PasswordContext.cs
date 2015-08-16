@@ -16,6 +16,8 @@ namespace PasswordManager.Models.Data
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Center> Centers { get; set; }
 
+        public virtual DbSet<Book> Books { get; set; }
+
         public virtual DbSet<Preference> Preferences { get; set; }
     }
 }
