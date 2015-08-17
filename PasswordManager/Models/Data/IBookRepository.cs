@@ -10,6 +10,7 @@ namespace PasswordManager.Models.Data
         IEnumerable<Book> Books { get; }
         IPagedList<Book> GetBooksInPage(string searchTerm, int page, int pageSize);
 
+        int TotalCount { get; }
         Book Find(int id);
 
         int Add(Book book);
