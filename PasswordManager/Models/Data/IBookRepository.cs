@@ -12,6 +12,7 @@ namespace PasswordManager.Models.Data
 
         int TotalCount { get; }
         Book Find(int id);
+        bool Exists(string author, string title);
 
         int Add(Book book);
         void Update(Book book);

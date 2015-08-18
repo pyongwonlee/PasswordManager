@@ -1,0 +1,30 @@
+﻿@model PasswordManager.Models.Entities.Book
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.SumbitTitle = "Create";
+}
+
+<h2>A New Book</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_BookForm", @Model)
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-link" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#movie-link").addClass("active");
+        });
+    </script>
+}

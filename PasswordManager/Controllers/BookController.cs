@@ -52,32 +52,31 @@ namespace PasswordManager.Controllers
             return Index(page, searchTerm);
         }
 
-        // GET: Book/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Book/Create
+        [Route("Book/Create")]
         public ActionResult Create()
         {
-            return View();
+            return View(new Book() { Year = 2000 });
         }
 
-        // POST: Book/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        [Route("Book/Create")]
+        public ActionResult Create(Book book)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                Trim(book);
+                if (!repository.Exists(book.Author, book.Title))
+                {
+                    repository.Add(book);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("Title", "The book already exists.");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(book);
         }
 
         // GET: Book/Edit/5
@@ -122,6 +121,16 @@ namespace PasswordManager.Controllers
             {
                 return View();
             }
+        }
+
+        [NonAction]
+        private void Trim(Book book)
+        {
+            book.Author = book.Author.Trim();
+            book.Title = book.Title.Trim();
+            book.Publisher = book.Publisher.Trim();
+            book.Location = book.Location.Trim();
+            book.ISBN = book.ISBN.Trim();
         }
     }
 }

@@ -124,13 +124,13 @@ namespace PasswordManager.Models.Data
         public bool Exists(string title, int directorId)
         {
             return context.Movies
-                .Where(m => m.Title == title && m.DirectorId == directorId).Count() > 0;
+                .Where(m => m.Title == title && m.DirectorId == directorId).Any();
         }
 
         public bool Exists(string title, int directorId, int currentId)
         {
             return context.Movies
-                .Where(m => m.Title == title && m.DirectorId == directorId && m.Id != currentId).Count() > 0;
+                .Where(m => m.Title == title && m.DirectorId == directorId && m.Id != currentId).Any();
         }
          
         public int Add(Movie movie)
