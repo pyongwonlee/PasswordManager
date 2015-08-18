@@ -37,6 +37,21 @@ namespace PasswordManager.Controllers
             return View("Index", model);
         }
 
+        [Route("Book/Refresh")]
+        public ActionResult Refresh()
+        {
+            int page = 1;
+            string searchTerm = "";
+            return Index(page, searchTerm);
+        }
+
+        [Route("Book/Search")]
+        public ActionResult Search(string searchTerm = "")
+        {
+            int page = 1;
+            return Index(page, searchTerm);
+        }
+
         // GET: Book/Details/5
         public ActionResult Details(int id)
         {

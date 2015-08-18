@@ -1,0 +1,56 @@
+﻿@model PasswordManager.Models.BookIndexViewModel
+
+<div id="movieList" class="movieList">
+    <div class="text-right text-warning">
+        @Model.Books.GetMetaData().TotalItemCount Movies
+    </div>
+    <table class="table table-striped movie-table">
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Publisher</th>
+                <th>Location</th>
+                <th>ISBN</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Books)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Publisher)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ISBN)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Book", new { id = item.BookId })" title="Edit" class="icon-menu"><i class="fa fa-edit"></i></a>
+                        <a href="@Url.Action("Delete", "Book", new { id = item.BookId })" title="Delete" class="icon-menu"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <div class="row">
+        @Html.PagedListPager(Model.Books, page => Url.Action("Index", new { page = page }),
+        PagedListRenderOptions.Classic)
+    </div>
+</div>
